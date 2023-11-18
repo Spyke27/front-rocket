@@ -5,13 +5,21 @@ import search from "../../../assets/search.svg";
 
 function Navbar() {
 
+  const isLogged = () => {
+    const token = localStorage.getItem('token')
+    return token ? true : false
+  }
+
   return (
     <>
       <nav className="h-16 md:h-16 flex items-center justify-between px-3 md:px-12">
         <div className="flex items-center w-1/2">
+        <Link to={'/'}>
           <div id="logo" className="w-36">
             <img src={logo} alt="logo" />
           </div>
+        </Link>
+
 
           <form action="/" className="hidden md:flex">
             <label
@@ -29,21 +37,22 @@ function Navbar() {
             </div>
           </form>
         </div>
-
-        <div className="flex items-center justify-center gap-2">
-          <Link to={'/login'}>
-            <button 
-            className="rounded-md hover:bg-cinza-100  px-4 py-2 text-cinza-600">
-              Login
-          </button>
-          </Link>
-          <Link to={'usuarios/cadastrar'}>          
-            <button 
-              className="rounded-md bg-roxo-300 px-4 py-2 text-cinza-100 hover:bg-roxo-400">
-                Sign up
+        {!isLogged() &&
+          <div className="flex items-center justify-center gap-2">
+            <Link to={'/login'}>
+              <button 
+              className="rounded-md hover:bg-cinza-100  px-4 py-2 text-cinza-600">
+                Login
             </button>
-          </Link>
-        </div>
+            </Link>
+            <Link to={'usuarios/cadastrar'}>          
+              <button 
+                className="rounded-md bg-roxo-300 px-4 py-2 text-cinza-100 hover:bg-roxo-400">
+                  Sign up
+              </button>
+            </Link>
+          </div>
+          }
           
       </nav>
 

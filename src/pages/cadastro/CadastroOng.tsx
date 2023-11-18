@@ -2,15 +2,14 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { api } from "../../service/Service";
 import { toast } from 'react-toastify';
-import Empresa from "../../model/Empresa";
+import Ong from "../../model/Ong";
 
-function CadastroEmpresa() {
+function CadastroOng() {
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [verificaSenha, setVerificaSenha] = useState(false)
     const navigate = useNavigate()
-    const [empresa, setEmpresa] = useState<Empresa>({
+    const [ong, setOng] = useState<Ong>({
       id: 0,
-      cnpj: '',
       nome: '',
       email: '',
       senha: '',
@@ -23,7 +22,7 @@ function CadastroEmpresa() {
     }
 
     useEffect(() => {
-      if(confirmarSenha != empresa.senha){
+      if(confirmarSenha != ong.senha){
         setVerificaSenha(true)
       } else {
         setVerificaSenha(false)
@@ -33,8 +32,8 @@ function CadastroEmpresa() {
     const updateModel = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
 
-        setEmpresa({
-            ...empresa,
+        setOng({
+            ...ong,
             [e.target.name]: e.target.value
         })
     }
@@ -43,13 +42,13 @@ function CadastroEmpresa() {
       event.preventDefault()
 
       try {
-        if(confirmarSenha == empresa.senha){
-            await api.post('empresas/cadastrar', {
-                ...empresa
+        if(confirmarSenha == ong.senha){
+            await api.post('ongs/cadastrar', {
+                ...ong
             })
 
             navigate('/login')
-            toast.success('Empresa cadastrada!', {
+            toast.success('Instituição cadastrada!', {
               position: "top-center",
               autoClose: 2000,
               hideProgressBar: true,
@@ -92,26 +91,14 @@ return(
     md:m-0 md:p-10 md:px-56">
     <form onSubmit={onSubmit}
     className="flex flex-col justify-center p-5 gap-2 md:gap-5 bg-white rounded-sm md:p-20">
-      <h2 className="text-cinza-700 text-center text-2xl md:text-4xl font-bold">Cadastro Empresa</h2>
-
-      <div>
-          <label htmlFor="cnpj" 
-          className="block mb-2 text-sm font-medium text-cinza-600">*CNPJ:</label>
-          <input type="text" name="cnpj" id="cnpj" 
-          placeholder="99.999.999/9999-99"
-          value={empresa.cnpj.replace(/\D+/g, '')} 
-          onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)}
-          maxLength={14}
-          className=" text-cinza-600 text-sm w-full p-2.5 border-2 border-cinza-300 
-          focus:outline-none focus:border-roxo-300" required/>
-      </div>
+      <h2 className="text-cinza-700 text-center text-2xl md:text-4xl font-bold">Cadastro Instituição</h2>
 
       <div>
           <label htmlFor="nome" 
             className="block mb-2 text-sm font-medium text-cinza-600">*Nome:</label>
           <input type="text" name="nome" id="nome" 
-            placeholder="Digite a razão social da empresa"
-            value={empresa.nome} 
+            placeholder="Digite a razão social da ong"
+            value={ong.nome} 
             onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)}
             className=" text-cinza-600 text-sm w-full p-2.5 border-2 border-cinza-300 
             focus:outline-none focus:border-roxo-300" required 
@@ -123,7 +110,7 @@ return(
           className="block mb-2 text-sm font-medium text-cinza-600">*Email:</label>
           <input type="email" name="email" id="email" 
           placeholder="Digite o email"
-          value={empresa.email} 
+          value={ong.email} 
           onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)}
           className=" text-cinza-600 text-sm w-full p-2.5 border-2 border-cinza-300 
           focus:outline-none focus:border-roxo-300" required/>
@@ -132,7 +119,7 @@ return(
         <label htmlFor="senha" 
         className="block mb-2 text-sm font-medium text-cinza-600">*Senha:</label>
         <input type="password" name="senha" id="senha" placeholder="**********"
-        value={empresa.senha}
+        value={ong.senha}
         onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)}
         minLength={6}
         className=" text-cinza-600 text-sm w-full p-2.5 border-2 border-cinza-300 
@@ -155,7 +142,7 @@ return(
             className="block mb-2 text-sm font-medium text-cinza-600">*Sobre:</label>
           <input type="text" name="sobre" id="sobre" 
             placeholder="Conte um pouco sobre a instituição, valores, missão e seus propósitos aqui na rede"
-            value={empresa.sobre}
+            value={ong.sobre}
             onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)}
             className=" text-cinza-600 text-sm w-full md:h-32 p-2.5 border-2 border-cinza-300 
             focus:outline-none focus:border-roxo-300" required 
@@ -173,4 +160,4 @@ return(
    )
 }
 
-export default CadastroEmpresa;
+export default CadastroOng;

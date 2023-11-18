@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import Sliders from "../assets/Sliders";
+import Sliders from "../../assets/Sliders";
 
 const sliders = [
   {

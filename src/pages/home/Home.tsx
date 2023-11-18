@@ -1,4 +1,5 @@
-import Banner from '../../components/Banner'
+import Banner from '../../components/home/Banner'
+import Impacto from '../../components/home/Impacto'
 import { Vagas } from '../vagas/ListarVagas'
 
 function Home() {
@@ -6,6 +7,7 @@ function Home() {
     <>
       <Banner />
       <Vagas />
+      <Impacto />
     </>
   )
 }

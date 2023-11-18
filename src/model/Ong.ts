@@ -1,11 +1,10 @@
 interface Ong {
     id: number;
-    cnpj?: string | null;
     nome: string;
     email: string;
     senha: string;
     cadastro: string;
-    sobre?: string | null;
+    sobre: string;
     logo?: string | null;
 }
 
