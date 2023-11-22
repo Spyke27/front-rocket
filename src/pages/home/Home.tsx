@@ -1,6 +1,6 @@
 import Banner from '../../components/home/Banner'
 import Impacto from '../../components/home/Impacto'
-import { Vagas } from '../vagas/ListarVagas'
+import { Vagas } from '../../components/vagas/ListarVagas'
 
 function Home() {
   return (

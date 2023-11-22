@@ -5,6 +5,7 @@ import { api } from "../../service/Service";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import RedirectLogin from '../../service/RedirectLogin'
 
 function CadastroVaga() {
     const [causas, setCausas] = useState<Causa[]>([]);
@@ -13,6 +14,7 @@ function CadastroVaga() {
     const [text, setText] = useState('');
     const [cep, setCep] = useState('');
     const navigate = useNavigate()
+
     const [vaga, setVaga] = useState<Vaga>({
         id: 0,
         titulo: '',
@@ -108,6 +110,7 @@ function CadastroVaga() {
 
     return(
     <>
+    <RedirectLogin />
     <div className="bg-cinza-100 shadow-inner p-10 md:m-0 md:p-10 md:px-56">
         <form 
         onSubmit={onSubmit}
@@ -176,6 +179,7 @@ function CadastroVaga() {
             </div>
 
             <div className="flex flex-col mt-2 gap-3">
+                <h2 className="text-cinza-900 text-xl mt-3 md:mt-5">Local da Vaga:</h2>
                 <div className="flex flex-col md:flex-row gap-2">
                     <div className="md:w-2/5 w-full">
                         <label className="block mb-2 text-sm text-cinza-600">CEP:</label>

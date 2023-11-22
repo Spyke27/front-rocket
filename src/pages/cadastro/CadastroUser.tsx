@@ -27,6 +27,7 @@ function CadastroUser() {
       } else {
         setVerificaSenha(false)
       }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [confirmarSenha])
 
     const confirmarSenhaHandle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -150,10 +151,10 @@ return(
         {verificaSenha? <p className="text-xs text-laranja-500">as senhas devem ser iguais</p> : ''}
       </div>
 
-      <div className="md:flex gap-5">
+      <div className="md:flex md:gap-5 md:flex-row flex flex-col gap-2">
         <div className="md:w-1/2">
             <label htmlFor="telefone" 
-            className="block mb-2 text-sm font-medium text-cinza-600">Telefone:</label>
+            className="block mb-2 text-sm font-medium text-cinza-600">*Telefone:</label>
             <input type="tel" name="telefone" id="telefone" placeholder="(00)00000-0000"
             maxLength={11}
             value={usuario.telefone.replace(/\D+/g, '')}
@@ -163,7 +164,7 @@ return(
         </div>
         <div className="md:w-1/2">
             <label htmlFor="data_nasc" 
-            className="block mb-2 text-sm font-medium text-cinza-600">data_nasc:</label>
+            className="block mb-2 text-sm font-medium text-cinza-600">*Data de nascimento:</label>
             <input type="date" name="data_nasc" id="data_nasc" placeholder="01/01/2000"
             value={usuario.data_nasc}
             onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)}
@@ -172,7 +173,7 @@ return(
         </div>
       </div>
       <div>
-        <label htmlFor="empresa_id" 
+        <label htmlFor="empresa_id"
         className="block mb-2 text-sm font-medium text-cinza-600">*ID empresa:</label>
         <input type="number" name="empresa_id" id="empresa_id" placeholder="Identificador"
         value={usuario.empresa_id}

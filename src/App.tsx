@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CadastroOng from './pages/cadastro/CadastroOng'
 import CadastroVaga from './pages/cadastro/CadastroVaga'
+import Empresas from './pages/empresas/Empresas'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/usuarios/cadastrar' element={<CadastroUser />} />
+        <Route path='/empresas' element={<Empresas />} />
         <Route path='/empresas/cadastrar' element={<CadastroEmpresa />} />
         <Route path='/instituicoes/cadastrar' element={<CadastroOng />} />
         <Route path='/vagas/cadastrar' element={<CadastroVaga />} />

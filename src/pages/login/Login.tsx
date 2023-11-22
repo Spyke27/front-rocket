@@ -9,7 +9,7 @@ function Login() {
   const [token, setToken] = useState<Token>()
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
-  const [tipo, setTipo] = useState('')
+  const [tipo, setTipo] = useState('Usuario')
 
   const handleClick = () => { navigate('/recuperar-senha') }
   const cadastrar = () => { navigate('/usuarios/cadastrar') }
@@ -21,7 +21,8 @@ function Login() {
       setToken(await api.post(`/${tipo}/login`, { email, senha } ))
 
       if(token){
-        localStorage.setItem('token', JSON.stringify(token.data))
+        sessionStorage.setItem('token', JSON.stringify(token.data))
+
         window.location.href = '/'
         toast.success('Login efetuado!', {
           position: "top-center",
@@ -49,16 +50,6 @@ function Login() {
     }
   }
 
-  const setEmpresas = () => {
-    setTipo('empresas')
-  }
-  const setUsuarios = () => {
-    setTipo('usuarios')
-  }
-  const setInstituicoes = () => {
-    setTipo('ongs')
-  }
-
    return(
     <>
     <div className="bg-roxo-300 shadow-inner p-10
@@ -67,23 +58,20 @@ function Login() {
     className="flex flex-col justify-center p-5 gap-2 md:gap-5 bg-white rounded-sm md:p-20">
       <h2 className="text-cinza-700 text-center text-2xl md:text-4xl font-bold">Login {tipo}</h2>
 
-      <div className="flex justify-center gap-1 [&>*:hover]:bg-roxo-500 [&>*:focus]:bg-roxo-500">
-        <button type="button"
-        onClick={setEmpresas}
-        className="md:w-24 text-xs px-3 py-2 md:px-4 md:py-2 md:text-sm bg-roxo-300 text-cinza-100 rounded-sm">
-          Empresa
-        </button>
-        <button type="button"
-        onClick={setUsuarios} 
-        className="md:w-24 text-xs px-3 py-2 md:px-4 md:py-2 md:text-sm bg-roxo-300 text-cinza-100 rounded-sm">
-          Usuario
-        </button>
-        <button type="button"
-        onClick={setInstituicoes}
-        className="md:w-24 w-20 text-xs px-3 py-2 md:px-4 md:py-2 md:text-sm bg-roxo-300 text-cinza-100 rounded-sm">
-          Ongs
-        </button>
-      </div>
+    <div className="my-3 ">
+    <label htmlFor="tipo"
+      className="block mb-2 text-sm text-cinza-900">
+        Selecione uma opção:</label>
+      <select
+      id="tipo" name="tipo"
+      className="w-28"
+      value={tipo}
+      onChange={(e) => setTipo(e.target.value)}>
+        <option value="usuarios">Usuário</option>
+        <option value="empresas">Empresa</option>
+        <option value="ongs">Instituição</option>
+      </select>
+    </div>
 
       <div>
           <label htmlFor="email" 
