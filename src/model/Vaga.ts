@@ -7,7 +7,7 @@ interface Vaga {
     titulo: string;
     sobre: string;
     data: string;
-    cadastro?: string;
+    cadastro: string;
     qtd_vagas: number;
     qtd_volun: number;
     causa_id: number;

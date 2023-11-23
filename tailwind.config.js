@@ -59,6 +59,7 @@ export default {
     extend: {
       height: {
         '100': '29rem',
+        '120': '35rem',
       }
     },
     fontFamily: {

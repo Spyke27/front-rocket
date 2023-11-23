@@ -11,6 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import CadastroOng from './pages/cadastro/CadastroOng'
 import CadastroVaga from './pages/cadastro/CadastroVaga'
 import Empresas from './pages/empresas/Empresas'
+import Vagas  from './pages/vagas/Vagas'
+import InfoVaga from './components/vagas/InfoVaga'
 
 function App() {
 
@@ -25,6 +27,8 @@ function App() {
         <Route path='/empresas/cadastrar' element={<CadastroEmpresa />} />
         <Route path='/instituicoes/cadastrar' element={<CadastroOng />} />
         <Route path='/vagas/cadastrar' element={<CadastroVaga />} />
+        <Route path='/vagas' element={<Vagas />} />
+        <Route path='/vaga/info/:id' element={<InfoVaga />} />
       </Routes>
       <Footer />
       <ToastContainer />

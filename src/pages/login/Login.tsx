@@ -13,6 +13,7 @@ function Login() {
 
   const handleClick = () => { navigate('/recuperar-senha') }
   const cadastrar = () => { navigate('/usuarios/cadastrar') }
+  const refreshPage = () => { location.reload() }
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -23,8 +24,7 @@ function Login() {
       if(token){
         sessionStorage.setItem('token', JSON.stringify(token.data))
 
-        window.location.href = '/'
-        toast.success('Login efetuado!', {
+          toast.success('Login efetuado!', {
           position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -34,6 +34,28 @@ function Login() {
           progress: undefined,
           theme: "light",
           });
+
+          navigate(-1)
+          setTimeout(refreshPage, 1800)
+
+          if(tipo == 'empresas'){
+            const empresa = await api.get(`/empresas/buscar/${email}`)
+            sessionStorage.setItem('userType', tipo)
+            sessionStorage.setItem('userId', empresa.data.id)
+            sessionStorage.setItem('userName', empresa.data.nome)
+          } 
+          else if(tipo == 'usuarios'){
+            const usuario = await api.get(`/usuarios/email/${email}`)
+            sessionStorage.setItem('userType', tipo)
+            sessionStorage.setItem('userId', usuario.data.id)
+            sessionStorage.setItem('userName', usuario.data.nome)
+          }
+          else if(tipo == 'ongs'){
+            const ong = await api.get(`/ongs/email/${email}`)
+            sessionStorage.setItem('userType', tipo)
+            sessionStorage.setItem('userId', ong.data.id)
+            sessionStorage.setItem('userName', ong.data.nome)
+          }
       }
       
     } catch (error) {

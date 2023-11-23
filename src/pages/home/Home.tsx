@@ -1,12 +1,12 @@
 import Banner from '../../components/home/Banner'
 import Impacto from '../../components/home/Impacto'
-import { Vagas } from '../../components/vagas/ListarVagas'
+import { ListarVagas } from '../../components/vagas/ListarVagas'
 
 function Home() {
   return (
     <>
       <Banner />
-      <Vagas />
+      <ListarVagas />
       <Impacto />
     </>
   )

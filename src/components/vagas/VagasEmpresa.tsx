@@ -9,7 +9,7 @@ import LocalIcon from '../../assets/icons/local.svg'
 import HandIcon from '../../assets/icons/hand.svg'
 import { Link } from "react-router-dom";
 
-export const ListarVagas = () => {
+function VagasEmpresa() {
     const [vagas, setVagas] = useState<Vaga[]>([])
     const widthScreen = window.screen.width
     let qtd_slides = 1
@@ -21,8 +21,8 @@ export const ListarVagas = () => {
     }
 
     async function getVagas() {
-        const response = api.get('/vagas')
-        setVagas((await response).data)
+        const response = await api.get('/vagas/empresa/listar')
+        setVagas(response.data)
     }
     
     useEffect(() => {
@@ -31,8 +31,29 @@ export const ListarVagas = () => {
 
     return(
     <>
+    
     <div className="w-full">
-        <h2 className="text-3xl md:text-4xl font-bold text-roxo-500 pt-5 ps-5 md:ms-8">Vagas Abertas:</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-verde-300 pt-5 ps-5 md:ms-8 mb-5">Vagas associadas:</h2>
+
+        {vagas.length == 0 &&
+            <div className="flex flex-col gap-3 justify-center items-center w-full h-20 md:h-36 mb-5">
+                <p className="text-lg md:text-2xl text-cinza-500/75">Não há nada no momento...</p>
+                <div className="flex gap-3">
+                    <Link to={'/vagas'}>
+                        <div className="flex justify-center items-center bg-verde-300 text-white font-bold px-4 py-1 rounded-md md:px-10 md:py-3">
+                            Ver Vagas
+                        </div>
+                    </Link>
+
+                    <Link to={'/vagas/cadastrar'}>
+                        <div className="flex justify-center items-center bg-verde-300 text-white font-bold px-4 py-1 rounded-md md:px-10 md:py-3">
+                            Criar Vaga
+                        </div>
+                    </Link>
+                </div>
+            </div>
+        }
+
     <Swiper
         modules={[Pagination]}
         slidesPerView={qtd_slides}
@@ -43,7 +64,8 @@ export const ListarVagas = () => {
           className="w-72 h-96 relative p-12"
           >
             <Link to={`/vaga/info/${vaga.id}`}>
-            <div className="shadow-lg rounded-md border border-cinza-200 bg-white flex justify-center 
+            <div
+            className="shadow-lg rounded-md border border-cinza-200 bg-white flex justify-center 
             items-center flex-col w-72 h-96 hover:scale-105 transition relative duration-300 ease-in-out cursor-pointer">
             <img src={vaga.capa ?? ImagePadrao} alt="Capa da Vaga" 
             className="top-0 rounded-t-md absolute w-80" />
@@ -84,3 +106,5 @@ export const ListarVagas = () => {
     </>
     )
 }
+
+export default VagasEmpresa

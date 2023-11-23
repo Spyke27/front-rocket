@@ -94,13 +94,14 @@ function Navbar() {
 
       <div
         id="sub-menu"
-        className="hidden md:flex justify-center items-center bg-roxo-300 text-cinza-100 h-6 gap-8 
+        className="flex justify-center items-center bg-roxo-300 text-cinza-100 h-6 gap-8 
         [&>*:hover]:scale-105 [&>*:hover]:text-white"
       >
+        <Link to={'/vagas'}>Vagas</Link>
         <Link to={'/empresas'}>Empresa</Link>
         <Link to={'/'}>Voluntário</Link>
-        <Link to={'/'}>Ong</Link>
-        <Link to={'/'}>Quem somos</Link>
+        <Link to={'/'} className="hidden md:flex">Ong</Link>
+        <Link to={'/'} className="hidden md:flex">Quem somos</Link>
       </div>
     </>
   );
