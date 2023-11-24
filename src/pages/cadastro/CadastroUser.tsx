@@ -51,17 +51,6 @@ function CadastroUser() {
           await api.post('usuarios/cadastrar', {
             ...usuario
           })
-          navigate('/login')
-          toast.success('Usuário cadastrado!', {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
         } 
         else {
           toast.warn('As senhas devem ser iguais!', {
@@ -72,9 +61,20 @@ function CadastroUser() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: "colored",
             });
         }
+        navigate('/login')
+        toast.success('Usuário cadastrado!', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       } catch (error) {
         toast.warn('Verifique as informações!', {
           position: "top-center",
@@ -84,7 +84,7 @@ function CadastroUser() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
+          theme: "colored",
           });
       }
     }

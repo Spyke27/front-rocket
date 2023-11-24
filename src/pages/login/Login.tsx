@@ -78,7 +78,7 @@ function Login() {
     md:m-0 md:p-10 md:px-56">
     <form onSubmit={onSubmit} 
     className="flex flex-col justify-center p-5 gap-2 md:gap-5 bg-white rounded-sm md:p-20">
-      <h2 className="text-cinza-700 text-center text-2xl md:text-4xl font-bold">Login {tipo}</h2>
+      <h2 className="text-cinza-700 text-center text-2xl md:text-4xl font-bold">Login</h2>
 
     <div className="my-3 ">
     <label htmlFor="tipo"

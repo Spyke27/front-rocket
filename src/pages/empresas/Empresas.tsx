@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
-import { getToken } from "../../service/Auth"
 import BannerDesktop from '../../assets/images/EmpresasVisitantes_Desktop.png'
 import BannerMobile from '../../assets/images/EmpresasVisitantes_Mobile.png'
 
 import VagasEmpresa from "../../components/vagas/VagasEmpresa";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContex";
 
 function Empresas(){
-    const token = getToken()
     const largura = window.screen.width
+    const userLogged = useContext(UserContext)
 
 return(
 <>
@@ -22,7 +23,7 @@ return(
         </div>
     </Link>
 
-    {token &&
+    {userLogged?.tipo == 'empresas' &&
         <VagasEmpresa />
     }
     

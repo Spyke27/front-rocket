@@ -28,6 +28,7 @@ function CadastroEmpresa() {
       } else {
         setVerificaSenha(false)
       }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [confirmarSenha])
 
     const updateModel = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,21 +45,9 @@ function CadastroEmpresa() {
 
       try {
         if(confirmarSenha == empresa.senha){
-            await api.post('empresas/cadastrar', {
+            await api.post('/empresas/cadastrar', {
                 ...empresa
             })
-
-            navigate('/login')
-            toast.success('Empresa cadastrada!', {
-              position: "top-center",
-              autoClose: 2000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-              });
         } 
         else {
           toast.warn('As senhas devem ser iguais', {
@@ -69,9 +58,20 @@ function CadastroEmpresa() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: "colored",
             });
         }
+            navigate('/login')
+            toast.success('Empresa cadastrada!', {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
       } catch (error) {
         toast.warn('Verifique as informações!', {
           position: "top-center",
@@ -81,7 +81,7 @@ function CadastroEmpresa() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
+          theme: "colored",
           });
       }
     }

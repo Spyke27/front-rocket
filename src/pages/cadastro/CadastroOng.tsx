@@ -27,6 +27,7 @@ function CadastroOng() {
       } else {
         setVerificaSenha(false)
       }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [confirmarSenha])
 
     const updateModel = (e: ChangeEvent<HTMLInputElement>) => {
@@ -46,18 +47,6 @@ function CadastroOng() {
             await api.post('ongs/cadastrar', {
                 ...ong
             })
-
-            navigate('/login')
-            toast.success('Instituição cadastrada!', {
-              position: "top-center",
-              autoClose: 2000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-              });
         } 
         else {
           toast.warn('As senhas devem ser iguais', {
@@ -69,8 +58,19 @@ function CadastroOng() {
             draggable: true,
             progress: undefined,
             theme: "light",
-            });
+          });
         }
+        navigate('/login')
+        toast.success('Instituição cadastrada!', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       } catch (error) {
         toast.warn('Verifique as informações!', {
           position: "top-center",
@@ -81,7 +81,7 @@ function CadastroOng() {
           draggable: true,
           progress: undefined,
           theme: "light",
-          });
+        });
       }
     }
 
