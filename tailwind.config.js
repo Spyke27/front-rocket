@@ -58,6 +58,11 @@ export default {
     },
     extend: {
       height: {
+        '58': '14.5rem',
+        '100': '29rem',
+        '120': '35rem',
+      },
+      width: {
         '100': '29rem',
         '120': '35rem',
       }
