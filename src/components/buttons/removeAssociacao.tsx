@@ -4,16 +4,16 @@ import { api } from "../../service/Service"
 import { useParams } from "react-router-dom"
 import { toast } from 'react-toastify';
 
-function AssociarEmpresa(){
+function RemoveAssociacao(){
     const params = useParams()
-    const [text, setText] = useState('Associar-se')
+    const [text, setText] = useState('Remover ação')
 
     const handleClick = async () => {
         try {
-            await api.post(`/vagas/associar/${params.id}`)
-            setText('Remover ação')
+            await api.delete(`/vagas/deletar/associacao/${params.id}`)
+            setText('Associar-se')
 
-            toast.success('Ação associada!', {
+            toast.success('Ação removida!', {
                 position: "top-center",
                 autoClose: 2000,
                 hideProgressBar: true,
@@ -39,4 +39,4 @@ function AssociarEmpresa(){
         </>
     )
 
-}  export default AssociarEmpresa
+}  export default RemoveAssociacao
