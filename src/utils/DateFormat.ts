@@ -11,7 +11,7 @@ export const formatDate = (data: string) => {
 
 export const formatDateTime = (data: string) => {
     const date = new Date(data)
-    const horaF = date.getHours() -2; //Horário de Brasília
+    const horaF = date.getHours() + 3; //Horário de Brasília
     const hora = horaF.toString().padStart(2, '0');
     const minuto = date.getMinutes().toString().padStart(2, '0');
 
