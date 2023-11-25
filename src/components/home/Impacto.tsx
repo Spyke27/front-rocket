@@ -1,7 +1,7 @@
 function Impacto(){
     return(
     <>
-    <div className='flex flex-col justify-center items-center md:px-52 gap-5 mb-5'>
+    <div className='flex flex-col justify-center items-center md:px-52 gap-5 mb-5 py-5 md:py-10'>
         <h2 className='text-3xl md:text-5xl font-bold md:mb-6 text-cinza-900'>Nosso impacto:</h2>
 
         <div className='flex items-center md:flex-row flex-col justify-center md:rounded-full bg-laranja-500 text-white w-full md:h-40 h-full md:gap-0 gap-5'>
