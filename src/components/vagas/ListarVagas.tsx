@@ -32,7 +32,7 @@ export const ListarVagas = () => {
     return(
     <>
     {vagas.length > 0 &&
-    <div className="w-full bg-black">
+    <div className="w-full">
         <h2 className="text-3xl md:text-4xl font-bold text-roxo-500 pt-5 ps-5 md:ms-8">Vagas Abertas:</h2>
         <Swiper
             modules={[Pagination]}
