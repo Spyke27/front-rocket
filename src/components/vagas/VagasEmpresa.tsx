@@ -79,7 +79,7 @@ function VagasEmpresa() {
                     <h2 className="text-2xl text-center font-bold mb-4 text-roxo-800">{vaga.titulo}</h2>
                     <p className="text-sm text-cinza-900">
                         Por: <span className="font-semibold text-cinza-600">
-                            {vaga.empresa_id ? vaga.Empresas![0].nome : vaga.Ong?.nome}</span>
+                            {vaga.empresa_id ? 'Empresarial' : vaga.Ong?.nome}</span>
                     </p>
 
                     <div className="flex justify-between w-full mt-16 gap-2">
