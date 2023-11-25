@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import logo from "../../../assets/cbve/cbve_logo.png";
 import search from "../../../assets/icons/search.svg";
@@ -7,6 +7,7 @@ import { useState } from "react";
 
 function Navbar() {
   const [active, setActive] = useState(false);
+  const navigate = useNavigate()
 
   const isLogged = () => {
     const token = sessionStorage.getItem("token");
@@ -15,6 +16,7 @@ function Navbar() {
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
+    navigate('/')
     location.reload();
   };
 
