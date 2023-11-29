@@ -13,6 +13,7 @@ import CadastroVaga from './pages/cadastro/CadastroVaga'
 import Empresas from './pages/empresas/Empresas'
 import Vagas  from './pages/vagas/Vagas'
 import InfoVaga from './components/vagas/InfoVaga'
+import EmpresaPerfil from './pages/perfil/Empresa'
 
 function App() {
 
@@ -23,9 +24,12 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/usuarios/cadastrar' element={<CadastroUser />} />
-        <Route path='/empresas' element={<Empresas />} />
         <Route path='/empresas/cadastrar' element={<CadastroEmpresa />} />
         <Route path='/instituicoes/cadastrar' element={<CadastroOng />} />
+
+        <Route path='/empresas' element={<Empresas />} />
+        <Route path='/empresas/perfil/:id' element={<EmpresaPerfil />} />
+
         <Route path='/vagas/cadastrar' element={<CadastroVaga />} />
         <Route path='/vagas' element={<Vagas />} />
         <Route path='/vaga/info/:id' element={<InfoVaga />} />
