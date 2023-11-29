@@ -62,7 +62,7 @@ function Navbar() {
               className="flex flex-col list-none text-cinza-100 justify-center items-center 
                 [&>*:hover]:cursor-pointer [&>*:hover]:underline [&>*]:text-sm [&>*]:mx-5"
             >
-              <li><Link to={`/empresas/perfil/${userLogged?.id}`}>CONTA</Link></li>
+              <li><Link to={`/empresas/info/${userLogged?.id}`}>CONTA</Link></li>
               <hr className="text-black/50 w-20"/>
               <li onClick={handleLogout}>LOGOUT</li>
             </ul>
