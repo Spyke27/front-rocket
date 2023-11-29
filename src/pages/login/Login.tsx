@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { api } from "../../service/Service";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Token from "../../model/Token";
 import { toast } from 'react-toastify';
 
@@ -10,6 +10,10 @@ function Login() {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [tipo, setTipo] = useState('Usuario')
+
+  useEffect(() => {
+    document.title = 'Login';
+  }, []);
 
   const handleClick = () => { navigate('/recuperar-senha') }
   const cadastrar = () => { navigate('/usuarios/cadastrar') }

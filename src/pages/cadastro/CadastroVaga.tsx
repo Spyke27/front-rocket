@@ -43,6 +43,10 @@ function CadastroVaga() {
     })
 
     useEffect(() => {
+        document.title = 'Cadastrar Ação';
+      }, []);
+
+    useEffect(() => {
         async function getCausas(){
             const response = await api.get('/causas')
             setCausas(response.data)

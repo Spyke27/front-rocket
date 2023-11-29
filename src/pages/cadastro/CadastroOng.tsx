@@ -17,6 +17,10 @@ function CadastroOng() {
       sobre: '',
     })
 
+    useEffect(() => {
+      document.title = 'Cadastro Instituição';
+    }, []);
+
     const confirmarSenhaHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setConfirmarSenha(e.target.value)
     }

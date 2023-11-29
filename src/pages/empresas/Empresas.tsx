@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import BannerDesktop from '../../assets/images/EmpresasVisitantes_Desktop.png'
 import BannerMobile from '../../assets/images/EmpresasVisitantes_Mobile.png'
-
-import VagasEmpresa from "../../components/vagas/VagasEmpresa";
-import { useContext } from "react";
+import { VagasSlider } from "../../components/vagas/VagasSlider";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContex";
 
 function Empresas(){
     const largura = window.screen.width
     const userLogged = useContext(UserContext)
+
+    useEffect(() => {
+        document.title = 'Para empresas';
+      }, []);
 
 return(
 <>
@@ -24,7 +27,7 @@ return(
     </Link>
 
     {userLogged?.tipo == 'empresas' &&
-        <VagasEmpresa />
+        <VagasSlider url={'/vagas/empresa/listar'} text={'Vagas associadas:'}/>
     }
     
 </>

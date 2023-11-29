@@ -1,3 +1,4 @@
+import { VagasSlider } from "../../components/vagas/VagasSlider";
 import VagasCausa from "../../components/vagas/VagasCausa"
 import { Link } from "react-router-dom";
 import PlusIcon from '../../assets/icons/plus.svg'
@@ -8,6 +9,10 @@ function Vagas(){
     const userLogged = useContext(UserContext)
     const [allow, setAllow] = useState(false)
     const [hidden, setHidden] = useState('hidden')
+
+    useEffect(() => {
+        document.title = 'Ações';
+      }, []);
 
     useEffect(() => {
         if(userLogged?.tipo == 'empresas' || userLogged?.tipo == 'ongs'){
@@ -26,6 +31,9 @@ function Vagas(){
         <>
         <div className="flex flex-col relative">
             <VagasCausa />
+            <hr className="m-10 text-cinza-500/50 border"/>
+            <VagasSlider url={'/vagas/listar/ultimas'} text={'Ações fresquinhas:'}/>
+            
             
             {allow &&
                 <Link to={'/vagas/cadastrar'}>

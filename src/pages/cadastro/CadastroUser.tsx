@@ -22,6 +22,10 @@ function CadastroUser() {
     })
 
     useEffect(() => {
+      document.title = 'Cadastro Voluntário';
+    }, []);
+
+    useEffect(() => {
       if(confirmarSenha != usuario.senha){
         setVerificaSenha(true)
       } else {

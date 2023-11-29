@@ -18,6 +18,10 @@ function CadastroEmpresa() {
       sobre: '',
     })
 
+    useEffect(() => {
+      document.title = 'Cadastro Empresa';
+    }, []);
+
     const confirmarSenhaHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setConfirmarSenha(e.target.value)
     }
