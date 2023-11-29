@@ -28,7 +28,7 @@ function App() {
         <Route path='/instituicoes/cadastrar' element={<CadastroOng />} />
 
         <Route path='/empresas' element={<Empresas />} />
-        <Route path='/empresas/perfil/:id' element={<EmpresaPerfil />} />
+        <Route path='/empresas/info/:id' element={<EmpresaPerfil />} />
 
         <Route path='/vagas/cadastrar' element={<CadastroVaga />} />
         <Route path='/vagas' element={<Vagas />} />
