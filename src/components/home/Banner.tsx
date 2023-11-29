@@ -35,6 +35,7 @@ function Banner() {
           </SwiperSlide>
         ))}
       </Swiper>
+      <div className="w-full h-2 bg-roxo-500"></div>
     </>
   );
 }
