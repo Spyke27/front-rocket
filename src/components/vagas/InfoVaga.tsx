@@ -27,13 +27,13 @@ function InfoVaga(){
     const [email, setEmail] = useState('')
 
     useEffect(() => {
-        const teste = async () => {
+        const getAssociado = async () => {
             const response = await api.get(`/vagas/verificar/empresa/${params.id}`)
             if(response.data){
                 setAssociado(true)
             }
         }
-        teste()
+        getAssociado()
     }, [])
     
     useEffect(() => {
