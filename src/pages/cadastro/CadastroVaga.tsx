@@ -150,13 +150,18 @@ function CadastroVaga() {
         onSubmit={onSubmit}
         className="flex flex-col justify-center p-5 gap-2 md:gap-5 bg-white rounded-sm md:p-20 shadow">
 
-            <h2 className="text-cinza-700 text-center text-2xl md:text-4xl font-bold mb-5">Cadastrar Vaga</h2>
+            <h2 className="text-cinza-700 text-center text-2xl md:text-4xl font-bold mb-5">Cadastrar Ação</h2>
 
             <div>
                 <input type="url" name="capa" id="capa"
                 placeholder="URL da imagem de capa"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)}
                 className="text-cinza-600 text-sm border w-full p-2.5 outline-none" required/>
+            </div>
+
+            <div className="flex gap-3">
+                <input type="checkbox" name="disponivel" id="disponivel" />
+                <p className="text-cinza-900 text-sm">Deixar vaga disponível</p>
             </div>
 
             <div className="flex gap-5 md:gap-10">

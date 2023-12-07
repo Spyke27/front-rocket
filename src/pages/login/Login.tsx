@@ -9,7 +9,7 @@ function Login() {
   const [token, setToken] = useState<Token>()
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
-  const [tipo, setTipo] = useState('Usuario')
+  const [tipo, setTipo] = useState('usuarios')
 
   useEffect(() => {
     document.title = 'Login';
