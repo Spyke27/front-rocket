@@ -1,17 +1,14 @@
 //import { Link } from "react-router-dom"
-import { useState } from "react";
 import { api } from "../../service/Service"
 import { useParams } from "react-router-dom"
 import { toast } from 'react-toastify';
 
 function RemoveAssociacao(){
     const params = useParams()
-    const [text, setText] = useState('Remover ação')
 
     const handleClick = async () => {
         try {
             await api.delete(`/vagas/deletar/associacao/${params.id}`)
-            setText('Associar-se')
 
             toast.success('Ação removida!', {
                 position: "top-center",
@@ -22,7 +19,8 @@ function RemoveAssociacao(){
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                });            
+                });     
+                location.reload()       
         } catch (error) {
             console.log(error)
         }
@@ -33,8 +31,7 @@ function RemoveAssociacao(){
         <button
             onClick={handleClick}
             className="flex justify-center items-center bg-verde-300 px-8 py-2 rounded-md w-72 md:w-80 text-white
-            hover:bg-verde-300/80">
-            {text}
+            hover:bg-verde-300/80">Remover associação
         </button>
         </>
     )

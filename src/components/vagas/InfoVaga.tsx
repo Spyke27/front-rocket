@@ -15,6 +15,8 @@ import MapIcon from '../../assets/icons/map.svg'
 import ArrowLeftIcon from '../../assets/icons/arrow_left.svg'
 import HandIcon from '../../assets/icons/hand.svg'
 import RemoveAssociacao from "../buttons/removeAssociacao"
+import IncreverUser from '../buttons/InscreverUser'
+import RemoveInscricao from '../buttons/RemoveInscricao'
 
 function InfoVaga(){
     const params = useParams()
@@ -23,6 +25,7 @@ function InfoVaga(){
     const userLogger = useContext(UserContext)
     const userType = userLogger?.tipo
     const [associado, setAssociado] = useState(false)
+    const [inscrito, setInscrito] = useState(false)
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
 
@@ -34,6 +37,16 @@ function InfoVaga(){
             }
         }
         getAssociado()
+    }, [])
+
+    useEffect(() => {
+        const getInscrito = async () => {
+            const response = await api.get(`/vagas/verificar/usuario/${params.id}`)
+            if(response.data){
+                setInscrito(true)
+            }
+        }
+        getInscrito()
     }, [])
     
     useEffect(() => {
@@ -123,6 +136,9 @@ function InfoVaga(){
                 </div>
             </div>
 
+
+
+
             {/* DESKTOP */}
             <div className="hidden md:flex px-20 py-5 gap-2">
 
@@ -192,6 +208,13 @@ function InfoVaga(){
                                 <img src={HandIcon} alt="qtd_volun" />
                             </span>
                         </div>
+                    </div>
+                }
+
+                {userType == 'usuarios' &&
+                    <div>
+                        {!inscrito && <IncreverUser />}
+                        {inscrito && <RemoveInscricao />}
                     </div>
                 }
             </div>

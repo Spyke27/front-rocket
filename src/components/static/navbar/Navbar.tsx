@@ -26,6 +26,19 @@ function Navbar() {
     setActive(!active)
   }
 
+  const handleConta = () => {
+    const tipo = userLogged?.tipo
+    if(tipo == 'empresas'){
+      navigate(`/empresas/info/${userLogged?.id}`)
+    }
+    else if(userLogged?.tipo == 'usuarios'){
+      navigate(`/usuarios/info/${userLogged?.id}`)
+    }
+    else if(userLogged?.tipo == 'ongs'){
+      navigate(`/instituicoes/info/${userLogged?.id}`)
+    }
+  }
+
   return (
     <>
       <nav className="h-16 md:h-16 flex items-center justify-between px-3 md:px-12">
@@ -62,7 +75,7 @@ function Navbar() {
               className="flex flex-col list-none text-cinza-100 justify-center items-center 
                 [&>*:hover]:cursor-pointer [&>*:hover]:underline [&>*]:text-sm [&>*]:mx-5"
             >
-              <li><Link to={`/empresas/info/${userLogged?.id}`}>CONTA</Link></li>
+              <li onClick={handleConta}>CONTA</li>
               <hr className="text-black/50 w-20"/>
               <li onClick={handleLogout}>LOGOUT</li>
             </ul>
