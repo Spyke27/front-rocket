@@ -16,6 +16,8 @@ interface Vaga {
     qtd_volun: number;
     causa_id: number;
     ods_id: number;
+    disponivel: boolean;
+    finalizada: boolean;
     ong_id: number | null;
     empresa_id: number | null,
     cep: string;
