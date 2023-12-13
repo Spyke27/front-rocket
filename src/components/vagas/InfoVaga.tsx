@@ -17,13 +17,15 @@ import HandIcon from '../../assets/icons/hand.svg'
 import RemoveAssociacao from "../buttons/removeAssociacao"
 import IncreverUser from '../buttons/InscreverUser'
 import RemoveInscricao from '../buttons/RemoveInscricao'
+import Indisponivel from "../buttons/Indisponivel"
+import FinalizarVaga from "../buttons/FinalizarVaga"
 
 function InfoVaga(){
     const params = useParams()
     const navigate = useNavigate()
     const [vaga, setVaga] = useState<Vaga>()
-    const userLogger = useContext(UserContext)
-    const userType = userLogger?.tipo
+    const userLogged = useContext(UserContext)
+    const userType = userLogged?.tipo
     const [associado, setAssociado] = useState(false)
     const [inscrito, setInscrito] = useState(false)
     const [nome, setNome] = useState('')
@@ -195,7 +197,11 @@ function InfoVaga(){
                 {userType == 'empresas' &&
                     <div className="flex flex-col gap-2">
                         <div className="flex gap-2">
-                            {!associado && <AssociarEmpresa />}
+                            {!associado && 
+                            <div>
+                                {vaga.disponivel? <AssociarEmpresa /> : <Indisponivel />}
+                            </div>
+                            }
                             {associado && <RemoveAssociacao />}
                             <SendMessage 
                             email={`${email}`} />
@@ -208,6 +214,23 @@ function InfoVaga(){
                                 <img src={HandIcon} alt="qtd_volun" />
                             </span>
                         </div>
+                        
+                        {!vaga.finalizada &&
+                        <div>
+                            <div className="w-full">
+                                {userLogged?.id == vaga.empresa_id &&
+                                    <div>
+                                        {vaga.finalizada == false && <FinalizarVaga tempo={vaga.duracao} />}
+                                    </div>
+                                }
+                                {userLogged?.id == vaga.ong_id &&
+                                    <div>
+                                        {vaga.finalizada == false && <FinalizarVaga tempo={vaga.duracao} />}
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        }
                     </div>
                 }
 
