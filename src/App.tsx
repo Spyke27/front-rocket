@@ -14,6 +14,7 @@ import Empresas from './pages/empresas/Empresas'
 import Vagas  from './pages/vagas/Vagas'
 import InfoVaga from './components/vagas/InfoVaga'
 import EmpresaPerfil from './pages/perfil/Empresa'
+import RelatorioEmpresa from './components/relatorios/RelatorioEmpresa'
 
 function App() {
 
@@ -33,6 +34,8 @@ function App() {
         <Route path='/vagas/cadastrar' element={<CadastroVaga />} />
         <Route path='/vagas' element={<Vagas />} />
         <Route path='/vaga/info/:id' element={<InfoVaga />} />
+
+        <Route path='/relatorio/:id' element={<RelatorioEmpresa />} />
       </Routes>
       <Footer />
       <ToastContainer />
