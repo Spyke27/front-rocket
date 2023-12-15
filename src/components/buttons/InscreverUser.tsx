@@ -12,7 +12,7 @@ function IncreverUser(){
 
             toast.success('Inscrito!', {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -20,7 +20,9 @@ function IncreverUser(){
                 progress: undefined,
                 theme: "light",
                 });
-                location.reload()         
+                setTimeout(() => {
+                    location.reload()
+                }, 2000)         
         } catch (error) {
             console.log(error)
         }
