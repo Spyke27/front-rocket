@@ -19,6 +19,7 @@ function CadastroVaga() {
     const [horas, setHoras] = useState('');
     const [minutos, setMinutos] = useState('');
     const navigate = useNavigate()
+    const [boxValue, setBoxValue] = useState(true);
 
     const [vaga, setVaga] = useState<Vaga>({
         id: 0,
@@ -34,6 +35,8 @@ function CadastroVaga() {
         politica: '',
         qtd_vagas: 0,
         qtd_volun: 0,
+        disponivel: true,
+        finalizada: false,
         capa: '',
         cep: '',
         rua: '',
@@ -93,7 +96,8 @@ function CadastroVaga() {
             bairro: endereco.bairro,
             cidade: endereco.cidade,
             estado: endereco.estado,
-            duracao: parseInt(horas) * 60 + parseInt(minutos)
+            duracao: parseInt(horas) * 60 + parseInt(minutos),
+            disponivel: boxValue
         }
 
         try {
@@ -142,6 +146,10 @@ function CadastroVaga() {
         })
     }
 
+    const handleCheckBox = (e: ChangeEvent<HTMLInputElement>) => {
+        setBoxValue(e.target.checked)
+    }
+
     return(
     <>
     <RedirectLogin />
@@ -160,7 +168,11 @@ function CadastroVaga() {
             </div>
 
             <div className="flex gap-3">
-                <input type="checkbox" name="disponivel" id="disponivel" />
+                <input 
+                    type="checkbox" name="disponivel" id="disponivel" 
+                    checked={boxValue}
+                    onChange={handleCheckBox}
+                />
                 <p className="text-cinza-900 text-sm">Deixar vaga disponível</p>
             </div>
 

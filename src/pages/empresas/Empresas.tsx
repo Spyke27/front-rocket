@@ -27,7 +27,7 @@ return(
     </Link>
 
     {userLogged?.tipo == 'empresas' &&
-        <VagasSlider url={'/vagas/empresa/listar'} text={'Vagas associadas:'}/>
+        <VagasSlider url={`/vagas/empresa/vagas/${userLogged.id}`} text={'Vagas associadas:'}/>
     }
     
 </>

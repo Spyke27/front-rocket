@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom"
 import Empresa from "../../model/Empresa"
 import { api } from "../../service/Service"
-import { Link } from "react-router-dom"
 
 import CameraIcon from '../../assets/icons/camera.svg'
 import MapIcon from '../../assets/icons/map.svg'
@@ -16,6 +15,7 @@ function EmpresaPerfil(){
     const params = useParams()
     const [sobre, setSobre] = useState(true)
     const [acoes, setAcoes] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         document.title = 'Perfil Empresa';
@@ -38,11 +38,16 @@ function EmpresaPerfil(){
         getEmpresa()
     }, [params.id])
 
+    const toRelatorio = () => {
+            navigate(`/relatorio/${empresa?.id}`)
+    }
+
+
     return(
     <>
     <div className="w-full flex flex-col px-3 pb-10">
         <div className="w-full flex justify-between items-center py-5">
-            <div className="w-36 h-36 rounded-md">
+            <div className="w-36 h-36 md:w-1/5 md:h-auto rounded-md">
                 {empresa?.logo && 
                     <img src={empresa.logo} className="w-full h-full rounded-md"/>
                 }
@@ -53,10 +58,15 @@ function EmpresaPerfil(){
                     </div>
                 }
             </div>
-            <div className="flex flex-col w-1/2 break-words">
-                <h1 className="text-2xl font-bold">{empresa?.nome}</h1>
-                <p className="text-xs text-cinza-300">Associado {formatDate(empresa?.cadastro??'')}</p>
+            <div className="flex flex-col w-1/2 md:w-4/5 md:ml-10 break-word">
+                <h1 className="text-2xl font-bold md:text-4xl">{empresa?.nome}</h1>
+                <p className="text-xs text-cinza-300">Associado desde {formatDate(empresa?.cadastro??'')}</p>
                 <p className="text-laranja-400 text-sm mt-3">{empresa?.Endereco?.cidade} - {empresa?.Endereco?.estado}</p>
+                <button 
+                    onClick={toRelatorio}
+                    className="bg-roxo-300 w-44 px-4 py-1 text-cinza-100 rounded-lg mt-5 hover:bg-roxo-300/80">
+                        Gerar Relatório
+                </button>
             </div>
         </div>
 
