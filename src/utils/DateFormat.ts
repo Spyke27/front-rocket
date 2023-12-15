@@ -22,10 +22,12 @@ export const formatDateTime = (data: string) => {
 }
 
 export const convertHour = (minutos: number) => {
-    const horas = Math.floor(minutos/ 60);          
+    const horasF = Math.floor(minutos / 60);
+    const dias = Math.floor(horasF / 24);
+    const horas = horasF % 24;
     const min = minutos % 60;
     const textoHoras = (`00${horas}`).slice(-2);
     const textoMinutos = (`00${min}`).slice(-2);
     
-    return `${textoHoras }:${textoMinutos}`;
+    return `${dias}d e ${textoHoras}:${textoMinutos}H`;
   };
