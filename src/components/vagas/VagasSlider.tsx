@@ -51,7 +51,7 @@ export const VagasSlider = (props: Props) => {
             <div className="shadow-lg rounded-md border border-cinza-200 bg-white flex justify-center 
             items-center flex-col w-72 h-96 hover:scale-105 transition relative duration-300 ease-in-out cursor-pointer pt-40">
 
-            <img src={vaga.capa ?? ImagePadrao} alt="Capa da Vaga" 
+            <img src={vaga.capa ?? ImagePadrao} alt="Imagem de capa"
             className="top-0 rounded-t-md absolute w-80 h-40" />
 
             <div className="flex gap-2 py-1 px-2 bg-white z-10 absolute top-32 right-3 rounded-full">

@@ -2,17 +2,17 @@
 import { useContext, useEffect, useState } from "react"
 import Vaga from "../../model/Vaga"
 import { api } from "../../service/Service"
-import { useParams, useNavigate, Link } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { formatDate, formatDateTime, convertHour } from '../../utils/DateFormat'
 import AssociarEmpresa from "../buttons/AssociarEmpresa"
 import SendMessage from "../buttons/SendMessage"
 import { UserContext } from "../../contexts/UserContex"
+import Voltar from "../buttons/Voltar"
 
 import CapaPadrao from '../../assets/images/padraoVagas.png'
 import CalendarIcon from '../../assets/icons/calendar.svg'
 import ClockIcon from '../../assets/icons/clock.svg'
 import MapIcon from '../../assets/icons/map.svg'
-import ArrowLeftIcon from '../../assets/icons/arrow_left.svg'
 import HandIcon from '../../assets/icons/hand.svg'
 import RemoveAssociacao from "../buttons/removeAssociacao"
 import IncreverUser from '../buttons/InscreverUser'
@@ -22,7 +22,6 @@ import FinalizarVaga from "../buttons/FinalizarVaga"
 
 function InfoVaga(){
     const params = useParams()
-    const navigate = useNavigate()
     const [vaga, setVaga] = useState<Vaga>()
     const userLogged = useContext(UserContext)
     const userType = userLogged?.tipo
@@ -60,18 +59,12 @@ function InfoVaga(){
         }
         getVaga()
     }, [])
-
-    function handleClick(){navigate(-1)}
     
     return(
     <>
     {vaga &&
         <div className="flex gap-5 flex-col relative w-full h-full bg-white">
-            <button
-            onClick={handleClick}
-            className="flex justify-center items-center bg-cinza-200 rounded-full p-3 absolute top-5 left-5 z-10">
-                <img src={ArrowLeftIcon} width={20}/>
-            </button>
+            <Voltar />
             {/* MOBILE */}
             <div className="md:hidden pt-60 flex flex-col items-center gap-5">
                 <img src={vaga.capa ?? CapaPadrao} alt="Imagem de capa"
