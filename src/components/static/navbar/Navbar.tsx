@@ -3,11 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/cbve/cbve_logo.png";
 import search from "../../../assets/icons/search.svg";
 import ProfileIcon from "../../../assets/icons/profile.svg";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../../contexts/UserContex";
 
 function Navbar() {
-  const [active, setActive] = useState(false);
   const navigate = useNavigate()
   const userLogged = useContext(UserContext)
 
@@ -15,16 +14,6 @@ function Navbar() {
     const token = sessionStorage.getItem("token");
     return token ? true : false;
   };
-
-  const handleLogout = () => {
-    sessionStorage.removeItem("token");
-    navigate('/')
-    location.reload();
-  };
-
-  const handleMenu = () => {
-    setActive(!active)
-  }
 
   const handleConta = () => {
     const tipo = userLogged?.tipo
@@ -66,25 +55,9 @@ function Navbar() {
           </form>
         </div>
 
-        {active && (
-          <div
-            className="bg-roxo-500/50 absolute right-14 lg:right-24 top-2 z-20
-                rounded-md"
-          >
-            <ul
-              className="flex flex-col list-none text-cinza-100 justify-center items-center 
-                [&>*:hover]:cursor-pointer [&>*:hover]:underline [&>*]:text-sm [&>*]:mx-5"
-            >
-              <li onClick={handleConta}>CONTA</li>
-              <hr className="text-black/50 w-20"/>
-              <li onClick={handleLogout}>LOGOUT</li>
-            </ul>
-          </div>
-        )}
-
         {isLogged() && (
           <div
-            onClick={handleMenu}
+            onClick={handleConta}
             className="flex justify-center items-center h-10 w-10 rounded-full bg-cinza-100
            hover:bg-cinza-200 hover:cursor-pointer"
           >
