@@ -201,7 +201,7 @@ function CadastroVaga() {
                     className="bg-gray-50 border border-roxo-500 text-cinza-900 text-sm 
                     rounded-md w-40 md:w-72 px-2.5 py-1 focus:border-2">
                         {ods.map((ods) => (
-                            <option key={ods.id} value={ods.id}>{ods.nome}</option>
+                            <option key={ods.id} value={ods.id}>{ods.id} - {ods.nome}</option>
                         ))}
                     </select>
                 </div>

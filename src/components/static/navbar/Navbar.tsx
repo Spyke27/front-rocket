@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import logo from "../../../assets/cbve/cbve_logo.png";
 import search from "../../../assets/icons/search.svg";
+import Logout from "../../../assets/icons/logout.svg";
 import ProfileIcon from "../../../assets/icons/profile.svg";
 import { useContext } from "react";
 import { UserContext } from "../../../contexts/UserContex";
@@ -14,6 +15,14 @@ function Navbar() {
     const token = sessionStorage.getItem("token");
     return token ? true : false;
   };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userType");
+    sessionStorage.removeItem("userId");
+    sessionStorage.removeItem("userName");
+    navigate(0)
+  }
 
   const handleConta = () => {
     const tipo = userLogged?.tipo
@@ -83,14 +92,22 @@ function Navbar() {
 
       <div
         id="sub-menu"
-        className="flex justify-center items-center bg-roxo-300 text-cinza-100 h-6 gap-8 
+        className="flex relative justify-center items-center bg-roxo-300 text-cinza-100 h-6 gap-8 
         [&>*:hover]:scale-105 [&>*:hover]:text-white"
       >
         <Link to={'/vagas'}>Ações</Link>
         <Link to={'/empresas'}>Empresa</Link>
         <Link to={'/'}>Voluntário</Link>
-        <Link to={'/'} className="hidden md:flex">Ong</Link>
+        <Link to={'/'} className="hidden md:flex">Instituição</Link>
         <Link to={'/'} className="hidden md:flex">Quem somos</Link>
+        {isLogged() && 
+          <button 
+          onClick={handleLogout}
+            className="absolute right-10 flex gap-2 items-center">
+              Logout
+              <img src={Logout} width={15} />
+        </button>
+        }
       </div>
     </>
   );

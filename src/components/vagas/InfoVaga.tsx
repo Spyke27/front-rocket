@@ -31,13 +31,15 @@ function InfoVaga(){
     const [email, setEmail] = useState('')
 
     useEffect(() => {
-        const getAssociado = async () => {
-            const response = await api.get(`/vagas/verificar/empresa/${params.id}`)
-            if(response.data){
-                setAssociado(true)
+        if(userLogged?.id != null){
+            const getAssociado = async () => {
+                const response = await api.get(`/vagas/verificar/empresa/${params.id}`)
+                if(response.data){
+                    setAssociado(true)
+                }
             }
+            getAssociado()
         }
-        getAssociado()
     }, [])
 
     useEffect(() => {
@@ -187,6 +189,33 @@ function InfoVaga(){
                 </p>
             </Link>
 
+            {userLogged?.id == null && 
+                <div className="flex flex-col gap-2">
+                    <div className="flex gap-2">
+                            {!associado && 
+                            <div>
+                                {vaga.disponivel? 
+                                <Link to={`/login`}>
+                                    <AssociarEmpresa />
+                                </Link>
+                                 : <Indisponivel />}
+                            </div>
+                            }
+                            {associado && <RemoveAssociacao />}
+                            <SendMessage 
+                            email={`${email}`} />
+                        </div>
+
+                        <div className="flex justify-center items-center gap-5 bg-laranja-300/90 py-3 px-10 rounded-md">
+                            <p className="text-white">Vagas disponíveis: </p>
+                            <span className="flex gap-2 py-2 px-4 bg-white rounded-full">
+                                <p className="text-xs text-laranja-300">{vaga.qtd_volun}/{vaga.qtd_vagas}</p>
+                                <img src={HandIcon} alt="qtd_volun" />
+                            </span>
+                        </div>
+                </div>
+            }
+
                 {userType == 'empresas' &&
                     <div className="flex flex-col gap-2">
                         <div className="flex gap-2">
@@ -229,7 +258,11 @@ function InfoVaga(){
 
                 {userType == 'usuarios' &&
                     <div>
-                        {!inscrito && <IncreverUser />}
+                        {!inscrito && 
+                        <div>
+                            {vaga.disponivel? <IncreverUser /> : <Indisponivel />}
+                        </div>
+                        }
                         {inscrito && <RemoveInscricao />}
                     </div>
                 }

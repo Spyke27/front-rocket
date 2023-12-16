@@ -18,6 +18,8 @@ function VagasCausa(){
     return(
     <>
     <div className="flex flex-col mt-5">
+        <h2 className="text-3xl md:text-4xl font-bold text-roxo-500 mt-5 ps-5 md:ms-8 mb-5">
+            Encontre a causa que combina com você</h2>
         <div className="ml-8 md:ml-14">
             <label className="block text-sm md:text-lg text-cinza-900">Selecione a causa:</label>
             <select name="causa" id="causa"

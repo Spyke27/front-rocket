@@ -3,6 +3,7 @@ import Banner from '../../components/home/Banner'
 import Impacto from '../../components/home/Impacto'
 import { VagasSlider } from '../../components/vagas/VagasSlider'
 import { Link } from 'react-router-dom'
+import SobreCbve from '../../components/home/SobreCbve';
 
 function Home() {
   useEffect(() => {
@@ -25,6 +26,7 @@ function Home() {
         </button>
       </Link>
       <Impacto />
+      <SobreCbve />
     </>
   )
 }
