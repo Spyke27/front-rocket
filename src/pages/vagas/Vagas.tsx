@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import PlusIcon from '../../assets/icons/plus.svg'
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContex";
+import { VagasLocal } from "../../components/vagas/VagasLocal";
 
 function Vagas(){
     const userLogged = useContext(UserContext)
@@ -31,7 +32,7 @@ function Vagas(){
         <>
         <div className="flex flex-col relative">
             <VagasCausa />
-            <hr className="m-10 text-cinza-500/50 border"/>
+            {allow && <VagasLocal />}
             <VagasSlider url={'/vagas/listar/ultimas'} text={'Ações fresquinhas:'}/>
             
             

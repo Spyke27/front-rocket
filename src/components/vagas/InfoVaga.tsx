@@ -19,6 +19,8 @@ import IncreverUser from '../buttons/InscreverUser'
 import RemoveInscricao from '../buttons/RemoveInscricao'
 import Indisponivel from "../buttons/Indisponivel"
 import FinalizarVaga from "../buttons/FinalizarVaga"
+import DeletarVaga from "../buttons/DeletarVaga"
+import EditarVaga from "../buttons/EditarVaga"
 
 function InfoVaga(){
     const params = useParams()
@@ -27,7 +29,7 @@ function InfoVaga(){
     const userType = userLogged?.tipo
     const [associado, setAssociado] = useState(false)
     const [inscrito, setInscrito] = useState(false)
-    const [nome, setNome] = useState('')
+    const [nome, setNome] = useState('Empresa')
     const [email, setEmail] = useState('')
 
     useEffect(() => {
@@ -44,9 +46,11 @@ function InfoVaga(){
 
     useEffect(() => {
         const getInscrito = async () => {
-            const response = await api.get(`/vagas/verificar/usuario/${params.id}`)
-            if(response.data){
-                setInscrito(true)
+            if(userLogged?.id != null){
+                const response = await api.get(`/vagas/verificar/usuario/${params.id}`)
+                if(response.data){
+                    setInscrito(true)
+                }
             }
         }
         getInscrito()
@@ -56,7 +60,7 @@ function InfoVaga(){
         const getVaga = async () => {
             const response = await api.get(`/vagas/info/${params.id}`)
             setVaga(response.data)
-            setNome(response.data.ong_id ? response.data.Ong.nome : response.data.Empresas[0].nome)
+            setNome(response.data.Empresas[0] ? response.data.Empresas[0].nome : response.data.Ong.nome)
             setEmail(response.data.ong_id ? response.data.Ong.email : response.data.Empresas[0].email)
         }
         getVaga()
@@ -67,7 +71,7 @@ function InfoVaga(){
     {vaga &&
         <div className="flex gap-5 flex-col relative w-full h-full bg-white">
             <Voltar />
-            {/* MOBILE */}
+            {/* MOBILE */}  
             <div className="md:hidden pt-60 flex flex-col items-center gap-5">
                 <img src={vaga.capa ?? CapaPadrao} alt="Imagem de capa"
                 className="w-full absolute top-0 h-58"/>
@@ -194,14 +198,13 @@ function InfoVaga(){
                     <div className="flex gap-2">
                             {!associado && 
                             <div>
-                                {vaga.disponivel? 
+                                {vaga.disponivel ?
                                 <Link to={`/login`}>
                                     <AssociarEmpresa />
                                 </Link>
                                  : <Indisponivel />}
                             </div>
                             }
-                            {associado && <RemoveAssociacao />}
                             <SendMessage 
                             email={`${email}`} />
                         </div>
@@ -224,9 +227,17 @@ function InfoVaga(){
                                 {vaga.disponivel? <AssociarEmpresa /> : <Indisponivel />}
                             </div>
                             }
-                            {associado && <RemoveAssociacao />}
-                            <SendMessage 
-                            email={`${email}`} />
+                            {associado && 
+                                <div>
+                                    {vaga.empresa_id ==userLogged?.id ? 
+                                    <div className="flex gap-3">
+                                        <DeletarVaga />
+                                        <EditarVaga />
+                                    </div> 
+                                    : <RemoveAssociacao /> }
+                                </div>
+                            }
+                                <SendMessage email={`${email}`} />
                         </div>
 
                         <div className="flex justify-center items-center gap-5 bg-laranja-300/90 py-3 px-10 rounded-md">

@@ -10,7 +10,7 @@ function SendMessage(props: Props){
         <>
         <Link to={`mailto:${props.email}`}>
             <button 
-            className='flex gap-3 justify-center items-center bg-verde-300 px-5 py-3 rounded-md hover:bg-verde-300/80'>
+            className='flex justify-center items-center bg-verde-300 px-5 py-3 rounded-md hover:bg-verde-300/80'>
                 <img src={SendIcon} width={20} />
             </button>
         </Link>

@@ -15,6 +15,7 @@ import Vagas  from './pages/vagas/Vagas'
 import InfoVaga from './components/vagas/InfoVaga'
 import EmpresaPerfil from './pages/perfil/Empresa'
 import RelatorioEmpresa from './components/relatorios/RelatorioEmpresa'
+import EditarVaga from './pages/editar/EditarVaga'
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
         <Route path='/empresas/info/:id' element={<EmpresaPerfil />} />
 
         <Route path='/vagas/cadastrar' element={<CadastroVaga />} />
+        <Route path='/vagas/editar/:id' element={<EditarVaga />} />
         <Route path='/vagas' element={<Vagas />} />
         <Route path='/vaga/info/:id' element={<InfoVaga />} />
 

@@ -103,7 +103,7 @@ function CadastroVaga() {
         try {
             await api.post('/vagas/cadastrar', data)
             navigate(-1)
-            toast.success('Vaga Cadastrada!', {
+            toast.success('Ação Cadastrada!', {
                 position: "top-center",
                 autoClose: 2000,
                 hideProgressBar: true,

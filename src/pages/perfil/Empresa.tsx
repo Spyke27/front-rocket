@@ -39,7 +39,9 @@ function EmpresaPerfil(){
     }, [params.id])
 
     const toRelatorio = () => {
+        if(empresa?.id == Number(sessionStorage.getItem('userId'))){
             navigate(`/relatorio/${empresa?.id}`)
+        }
     }
 
 
@@ -54,7 +56,7 @@ function EmpresaPerfil(){
                 {!empresa?.logo && 
                     <div className="flex  flex-col justify-center items-center gap-2">
                         <img src={CameraIcon} width={50}/>
-                        <figcaption>Sem Capa</figcaption>
+                        <figcaption>Sem Foto</figcaption>
                     </div>
                 }
             </div>
@@ -62,11 +64,13 @@ function EmpresaPerfil(){
                 <h1 className="text-2xl font-bold md:text-4xl">{empresa?.nome}</h1>
                 <p className="text-xs text-cinza-300">Associado desde {formatDate(empresa?.cadastro??'')}</p>
                 <p className="text-laranja-400 text-sm mt-3">{empresa?.Endereco?.cidade} - {empresa?.Endereco?.estado}</p>
-                <button 
-                    onClick={toRelatorio}
-                    className="bg-roxo-300 w-44 px-4 py-1 text-cinza-100 rounded-lg mt-5 hover:bg-roxo-300/80">
-                        Gerar Relatório
-                </button>
+                {empresa?.id == Number(sessionStorage.getItem('userId')) && 
+                    <button 
+                        onClick={toRelatorio}
+                        className="bg-roxo-300 w-44 px-4 py-1 text-cinza-100 rounded-lg mt-5 hover:bg-roxo-300/80">
+                            Gerar Relatório
+                    </button>
+                }
             </div>
         </div>
 

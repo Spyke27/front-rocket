@@ -17,7 +17,7 @@ type Props = {
 export const VagasSlider = (props: Props) => {
     const [vagas, setVagas] = useState<Vaga[]>([])
     const widthScreen = window.screen.width
-    const qtd_slides = widthScreen / 320
+    const qtd_slides = widthScreen / 340
     
     useEffect(() => {
         async function getVagas() {
@@ -63,7 +63,7 @@ export const VagasSlider = (props: Props) => {
                 <h2 className="text-2xl text-center font-bold mb-4 text-roxo-800">{vaga.titulo}</h2>
                 <p className="text-sm text-cinza-900">
                     Por: <span className="font-semibold text-cinza-600">
-                        {vaga.empresa_id ? 'Empresarial' : vaga.Ong?.nome}
+                        {vaga.empresa_id ? vaga.Empresas![0].nome : vaga.Ong?.nome}
                         </span>
                 </p>
 
