@@ -229,12 +229,16 @@ function InfoVaga(){
                             }
                             {associado && 
                                 <div>
-                                    {vaga.empresa_id ==userLogged?.id ? 
-                                    <div className="flex gap-3">
-                                        <DeletarVaga />
-                                        <EditarVaga />
-                                    </div> 
-                                    : <RemoveAssociacao /> }
+                                    {vaga.disponivel && 
+                                        <div>
+                                            {vaga.empresa_id ==userLogged?.id ? 
+                                            <div className="flex gap-3">
+                                                <DeletarVaga />
+                                                <EditarVaga />
+                                            </div> 
+                                            : <RemoveAssociacao /> }
+                                        </div>
+                                    }
                                 </div>
                             }
                                 <SendMessage email={`${email}`} />
