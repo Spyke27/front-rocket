@@ -10,12 +10,12 @@ interface Vaga {
     data: string;
     duracao: number;
     impacto: number;
-    politica: string;
     cadastro?: string;
     qtd_vagas: number;
     qtd_volun: number;
     causa_id: number;
     ods_id: number;
+    politica_id: number;
     disponivel: boolean;
     finalizada: boolean;
     ong_id: number | null;
