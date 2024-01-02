@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react"
 import Vaga from "../../model/Vaga";
 import Causa from "../../model/Causa";
+import Politica from "../../model/Politica";
 import { api } from "../../service/Service";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +12,10 @@ import Ods from "../../model/Ods";
 function CadastroVaga() {
     const [causas, setCausas] = useState<Causa[]>([]);
     const [ods, setOds] = useState<Ods[]>([]);
+    const [politicas, setPoliticas] = useState<Politica[]>([]);
     const [selectCausa, setSelectCausa] = useState('1');
     const [selectOds, setSelectOds] = useState('1');
+    const [selectPolitica, setSelectPolitica] = useState('5');
     const [selectData, setSelectData] = useState('');
     const [text, setText] = useState('');
     const [cep, setCep] = useState('');
@@ -32,7 +35,7 @@ function CadastroVaga() {
         ong_id: 0,
         ods_id: 0,
         impacto: 0,
-        politica: '',
+        politica_id: 0,
         qtd_vagas: 0,
         qtd_volun: 0,
         disponivel: true,
@@ -65,8 +68,18 @@ function CadastroVaga() {
         getOds()
     }, [])
 
+    useEffect(() => {
+        async function getPoliticas(){
+            const response = await api.get('/politicas')
+            setPoliticas(response.data)
+        }
+        getPoliticas()
+    }, [])
+
     const updateModel = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
+
+        console.log(`Politica: ${vaga.politica_id} \n Causa: ${vaga.causa_id}`)
 
         setVaga({
             ...vaga,
@@ -89,7 +102,7 @@ function CadastroVaga() {
             causa_id: vaga.causa_id,
             ods_id: vaga.ods_id,
             impacto: vaga.impacto * 3,
-            politica: vaga.politica,
+            politica_id: Number(selectPolitica),
             capa: vaga.capa,
             cep,
             rua: endereco.rua,
@@ -159,6 +172,10 @@ function CadastroVaga() {
         className="flex flex-col justify-center p-5 gap-2 md:gap-5 bg-white rounded-sm md:p-20 shadow">
 
             <h2 className="text-cinza-700 text-center text-2xl md:text-4xl font-bold mb-5">Cadastrar Ação</h2>
+
+            <div className="w-full rounded-md">
+                <img src={String(vaga?.capa)} className="w-full" />
+            </div>
 
             <div>
                 <input type="url" name="capa" id="capa"
@@ -350,13 +367,19 @@ function CadastroVaga() {
                     className="text-cinza-600 text-sm w-20 p-2.5 border border-cinza-300 
                     focus:outline-none focus:border-roxo-300" required/>
                 </div>
-                <div className="mt-3">
-                    <label htmlFor="politica" 
-                    className="block mb-2 text-sm text-cinza-600">Essa ação possuí como finalidade alguma política pública?</label>
-                    <input type="text" name="politica" id="politica"
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)}
-                    className="text-cinza-600 text-sm w-full p-2.5 border border-cinza-300 
-                    focus:outline-none focus:border-roxo-300" required/>
+                <div>
+                    <label htmlFor="politicas" className="block mb-2 text-sm text-cinza-900">
+                        Essa ação possuí como finalidade alguma política pública?
+                    </label>
+                    <select id="politicas" 
+                        value={selectPolitica}
+                        onChange={(e) => setSelectPolitica(e.target.value)}
+                        className="bg-gray-50 border border-roxo-500 text-cinza-900 text-sm 
+                        rounded-md w-32 md:w-48 px-2.5 py-1 focus:border-2">
+                            {politicas.map((politica) => (
+                                <option key={politica.id} value={politica.id}>{politica.id} - {politica.nome}</option>
+                            ))}
+                    </select>
                 </div>
             </div>
             </div>
@@ -364,7 +387,7 @@ function CadastroVaga() {
             <button 
                 type="submit" 
                 className="flex items-center justify-center w-full bg-roxo-300 text-white text-sm py-2 md:py-3 rounded-sm mt-3 hover:bg-roxo-400">
-                Cadastrar
+                    Cadastrar
             </button>
 
         </form>
