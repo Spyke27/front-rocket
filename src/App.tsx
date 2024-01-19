@@ -14,8 +14,10 @@ import Empresas from './pages/empresas/Empresas'
 import Vagas  from './pages/vagas/Vagas'
 import InfoVaga from './components/vagas/InfoVaga'
 import EmpresaPerfil from './pages/perfil/Empresa'
-import RelatorioEmpresa from './components/relatorios/RelatorioEmpresa'
+import RelatorioEmpresa from './pages/relatorios/RelatorioEmpresa'
 import EditarVaga from './pages/editar/EditarVaga'
+import RelatorioGeral from './pages/relatorios/RelatorioGeral'
+import Voluntario from './pages/voluntarios/Voluntario'
 
 function App() {
 
@@ -38,6 +40,9 @@ function App() {
         <Route path='/vaga/info/:id' element={<InfoVaga />} />
 
         <Route path='/relatorio/:id' element={<RelatorioEmpresa />} />
+        <Route path='/geral/relatorio' element={<RelatorioGeral />} />
+
+        <Route path='/voluntarios' element={<Voluntario />} />
       </Routes>
       <Footer />
       <ToastContainer />
