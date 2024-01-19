@@ -53,6 +53,7 @@ function Login() {
             sessionStorage.setItem('userType', tipo)
             sessionStorage.setItem('userId', usuario.data.id)
             sessionStorage.setItem('userName', usuario.data.nome)
+            sessionStorage.setItem('empresaIdUser', usuario.data.empresa_id)
           }
           else if(tipo == 'ongs'){
             const ong = await api.get(`/ongs/email/${email}`)

@@ -29,13 +29,22 @@ function InfoVaga(){
     const userType = userLogged?.tipo
     const [associado, setAssociado] = useState(false)
     const [inscrito, setInscrito] = useState(false)
-    const [nome, setNome] = useState('Empresa')
+    const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
 
     useEffect(() => {
-        if(userLogged?.id != null){
+        if(userLogged?.tipo == "empresas"){
             const getAssociado = async () => {
                 const response = await api.get(`/vagas/verificar/empresa/${params.id}`)
+                if(response.data){
+                    setAssociado(true)
+                }
+            }
+            getAssociado()
+        }
+        if(userLogged?.tipo == "usuarios"){
+            const getAssociado = async () => {
+                const response = await api.get(`/vagas/verificar/associada/${params.id}/${sessionStorage.getItem('empresaIdUser')}`)
                 if(response.data){
                     setAssociado(true)
                 }
@@ -60,7 +69,12 @@ function InfoVaga(){
         const getVaga = async () => {
             const response = await api.get(`/vagas/info/${params.id}`)
             setVaga(response.data)
-            setNome(response.data.Empresas[0] ? response.data.Empresas[0].nome : response.data.Ong.nome)
+            if(response.data.empresa_id){
+                const empresa = await api.get(`/empresas/id/${response.data.empresa_id}`)
+                setNome(empresa.data.nome)
+            } else {
+                setNome(response.data.Ong.nome)
+            }
             setEmail(response.data.ong_id ? response.data.Ong.email : response.data.Empresas[0].email)
         }
         getVaga()
@@ -193,45 +207,19 @@ function InfoVaga(){
                 </p>
             </Link>
 
-            {userLogged?.id == null && 
-                <div className="flex flex-col gap-2">
-                    <div className="flex gap-2">
-                            {!associado && 
-                            <div>
-                                {vaga.disponivel ?
-                                <Link to={`/login`}>
-                                    <AssociarEmpresa />
-                                </Link>
-                                 : <Indisponivel />}
-                            </div>
-                            }
-                            <SendMessage 
-                            email={`${email}`} />
-                        </div>
-
-                        <div className="flex justify-center items-center gap-5 bg-laranja-300/90 py-3 px-10 rounded-md">
-                            <p className="text-white">Vagas disponíveis: </p>
-                            <span className="flex gap-2 py-2 px-4 bg-white rounded-full">
-                                <p className="text-xs text-laranja-300">{vaga.qtd_volun}/{vaga.qtd_vagas}</p>
-                                <img src={HandIcon} alt="qtd_volun" />
-                            </span>
-                        </div>
-                </div>
-            }
-
                 {userType == 'empresas' &&
-                    <div className="flex flex-col gap-2">
-                        <div className="flex gap-2">
+                    <div className="flex flex-col gap-2 w-full">
+                        <div className="flex gap-2 justify-between">
                             {!associado && 
-                            <div>
+                            <div className="w-full">
                                 {vaga.disponivel? <AssociarEmpresa /> : <Indisponivel />}
                             </div>
                             }
                             {associado && 
-                                <div>
+                                <div className="w-full">
                                     {vaga.disponivel && 
                                         <div>
-                                            {vaga.empresa_id ==userLogged?.id ? 
+                                            {vaga.empresa_id == userLogged?.id ? 
                                             <div className="flex gap-3">
                                                 <DeletarVaga />
                                                 <EditarVaga />
@@ -242,14 +230,6 @@ function InfoVaga(){
                                 </div>
                             }
                                 <SendMessage email={`${email}`} />
-                        </div>
-
-                        <div className="flex justify-center items-center gap-5 bg-laranja-300/90 py-3 px-10 rounded-md">
-                            <p className="text-white">Vagas disponíveis: </p>
-                            <span className="flex gap-2 py-2 px-4 bg-white rounded-full">
-                                <p className="text-xs text-laranja-300">{vaga.qtd_volun}/{vaga.qtd_vagas}</p>
-                                <img src={HandIcon} alt="qtd_volun" />
-                            </span>
                         </div>
                         
                         {!vaga.finalizada &&
@@ -272,15 +252,29 @@ function InfoVaga(){
                 }
 
                 {userType == 'usuarios' &&
-                    <div>
+                    <div className="flex gap-2 w-full">
                         {!inscrito && 
-                        <div>
-                            {vaga.disponivel? <IncreverUser /> : <Indisponivel />}
-                        </div>
+                            <div className="w-full">
+                                {associado ?
+                                    <div>
+                                        {vaga.disponivel ? <IncreverUser /> : <Indisponivel />}
+                                    </div> :
+                                    <Indisponivel />
+                                }
+                            </div>
                         }
                         {inscrito && <RemoveInscricao />}
+                        <SendMessage email={`${email}`} />
                     </div>
                 }
+
+                <div className="flex justify-center w-full items-center gap-5 bg-laranja-300/90 py-3 px-10 rounded-md">
+                    <p className="text-white">Vagas disponíveis: </p>
+                    <span className="flex gap-2 py-2 px-4 bg-white rounded-full">
+                        <p className="text-xs text-laranja-300">{vaga.qtd_volun}/{vaga.qtd_vagas}</p>
+                        <img src={HandIcon} alt="qtd_volun" />
+                    </span>
+                </div>
             </div>
 
         </div>

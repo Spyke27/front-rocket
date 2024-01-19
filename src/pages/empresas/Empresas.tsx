@@ -23,7 +23,7 @@ function Empresas(){
 
 return(
 <>
-    <Link target="_blank" to={'https://www.cbve.org.br/?page_id=14113'}>
+    <Link target="_blank" to={'/empresas'}>
         <div className="flex justify-center items-center w-full h-120 md:h-100">
             {largura < 500 &&
                 <img src={BannerMobile} alt="Banner" className="w-full h-full"/>

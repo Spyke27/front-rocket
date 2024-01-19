@@ -97,9 +97,9 @@ function Navbar() {
       >
         <Link to={'/vagas'}>Ações</Link>
         <Link to={'/empresas'}>Empresa</Link>
-        <Link to={'/'}>Voluntário</Link>
-        <Link to={'/'} className="hidden md:flex">Instituição</Link>
-        <Link to={'/'} className="hidden md:flex">Quem somos</Link>
+        <Link to={'/voluntarios'}>Voluntário</Link>
+        <Link to={'/instituicoes'} className="hidden md:flex">Instituição</Link>
+        <Link to={'/quemsomos'} className="hidden md:flex">Quem somos</Link>
         {isLogged() && 
           <button 
           onClick={handleLogout}

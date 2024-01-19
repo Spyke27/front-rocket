@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import Empresa from "../../model/Empresa"
 import { api } from "../../service/Service"
@@ -9,6 +9,7 @@ import EmailIcon from '../../assets/icons/email.svg'
 import WebIcon from '../../assets/icons/web.svg'
 import { formatDate } from "../../utils/DateFormat"
 import { VagasSlider } from "../../components/vagas/VagasSlider"
+import { UserContext } from "../../contexts/UserContex"
 
 function EmpresaPerfil(){
     const [empresa, setEmpresa] = useState<Empresa>()
@@ -16,6 +17,8 @@ function EmpresaPerfil(){
     const [sobre, setSobre] = useState(true)
     const [acoes, setAcoes] = useState(false)
     const navigate = useNavigate()
+    const [authAdm, setAuthAdm] = useState(false)
+    const userLogged = useContext(UserContext)
 
     useEffect(() => {
         document.title = 'Perfil Empresa';
@@ -38,9 +41,21 @@ function EmpresaPerfil(){
         getEmpresa()
     }, [params.id])
 
+    useEffect(() => {
+        if(params.id == userLogged?.id && Number(userLogged?.id) == 75017){
+            setAuthAdm(true)
+        }
+    }, [params.id, userLogged?.id])
+
     const toRelatorio = () => {
         if(empresa?.id == Number(sessionStorage.getItem('userId'))){
             navigate(`/relatorio/${empresa?.id}`)
+        }
+    }
+
+    const toRelatorioGeral = () => {
+        if(empresa?.id == Number(sessionStorage.getItem('userId'))){
+            navigate(`/geral/relatorio`)
         }
     }
 
@@ -64,7 +79,14 @@ function EmpresaPerfil(){
                 <h1 className="text-2xl font-bold md:text-4xl">{empresa?.nome}</h1>
                 <p className="text-xs text-cinza-300">Associado desde {formatDate(empresa?.cadastro??'')}</p>
                 <p className="text-laranja-400 text-sm mt-3">{empresa?.Endereco?.cidade} - {empresa?.Endereco?.estado}</p>
-                {empresa?.id == Number(sessionStorage.getItem('userId')) && 
+                {empresa?.id == Number(sessionStorage.getItem('userId')) && authAdm &&
+                    <button
+                    onClick={toRelatorioGeral}
+                        className="bg-roxo-300 w-60 px-4 py-1 text-cinza-100 rounded-lg mt-5 hover:bg-roxo-300/80">
+                            Gerar Relatório Geral
+                    </button>
+                }
+                {!authAdm && empresa?.id == Number(sessionStorage.getItem('userId')) && 
                     <button 
                         onClick={toRelatorio}
                         className="bg-roxo-300 w-44 px-4 py-1 text-cinza-100 rounded-lg mt-5 hover:bg-roxo-300/80">
