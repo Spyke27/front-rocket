@@ -27,7 +27,6 @@ function AssociarEmpresa(){
             console.log(error)
         }
     }
-
     return(
         <>
         <button
