@@ -32,7 +32,7 @@ function RemoveAssociacao(){
         <>
         <button
             onClick={handleClick}
-            className="flex justify-center items-center bg-verde-300 px-8 py-2 rounded-md w-72 md:w-80 text-white
+            className="flex justify-center items-center bg-verde-300 px-8 py-2 rounded-md w-72 md:w-full text-white
             hover:bg-verde-300/80">Remover inscrição
         </button>
         </>
