@@ -10,12 +10,14 @@ import WebIcon from '../../assets/icons/web.svg'
 import { formatDate } from "../../utils/DateFormat"
 import { VagasSlider } from "../../components/vagas/VagasSlider"
 import { UserContext } from "../../contexts/UserContex"
+import EditarPerfil from "../../components/editar/Perfil"
 
 function EmpresaPerfil(){
     const [empresa, setEmpresa] = useState<Empresa>()
     const params = useParams()
     const [sobre, setSobre] = useState(true)
     const [acoes, setAcoes] = useState(false)
+    const [config, setConfig] = useState(false)
     const navigate = useNavigate()
     const [authAdm, setAuthAdm] = useState(false)
     const userLogged = useContext(UserContext)
@@ -27,10 +29,18 @@ function EmpresaPerfil(){
     const clickSobre = () => {
         setSobre(true)
         setAcoes(false)
+        setConfig(false)
     }
     const clickAcoes = () => {
         setSobre(false)
         setAcoes(true)
+        setConfig(false)
+    }
+
+    const clickConfig = () => {
+        setSobre(false)
+        setAcoes(false)
+        setConfig(true)
     }
 
     useEffect(() => {
@@ -79,20 +89,22 @@ function EmpresaPerfil(){
                 <h1 className="text-2xl font-bold md:text-4xl">{empresa?.nome}</h1>
                 <p className="text-xs text-cinza-300">Associado desde {formatDate(empresa?.cadastro??'')}</p>
                 <p className="text-laranja-400 text-sm mt-3">{empresa?.Endereco?.cidade} - {empresa?.Endereco?.estado}</p>
-                {empresa?.id == Number(sessionStorage.getItem('userId')) && authAdm &&
-                    <button
-                    onClick={toRelatorioGeral}
-                        className="bg-roxo-300 w-60 px-4 py-1 text-cinza-100 rounded-lg mt-5 hover:bg-roxo-300/80">
-                            Gerar Relatório Geral
-                    </button>
-                }
-                {!authAdm && empresa?.id == Number(sessionStorage.getItem('userId')) && 
-                    <button 
-                        onClick={toRelatorio}
-                        className="bg-roxo-300 w-44 px-4 py-1 text-cinza-100 rounded-lg mt-5 hover:bg-roxo-300/80">
-                            Gerar Relatório
-                    </button>
-                }
+                <div className="flex gap-5">
+                    {empresa?.id == Number(sessionStorage.getItem('userId')) && authAdm &&
+                        <button
+                        onClick={toRelatorioGeral}
+                            className="bg-roxo-300 w-60 px-4 py-1 text-cinza-100 rounded-lg mt-5 hover:bg-roxo-300/80">
+                                Gerar Relatório Geral
+                        </button>
+                    }
+                    {empresa?.id == Number(sessionStorage.getItem('userId')) && 
+                        <button 
+                            onClick={toRelatorio}
+                            className="bg-roxo-300 w-44 px-4 py-1 text-cinza-100 rounded-lg mt-5 hover:bg-roxo-300/80">
+                                Gerar Relatório
+                        </button>
+                    }
+                </div>
             </div>
         </div>
 
@@ -100,6 +112,9 @@ function EmpresaPerfil(){
         [&>*:hover]:text-laranja-500">
             <button onClick={clickSobre}>Sobre</button>
             <button onClick={clickAcoes}>Ações</button>
+            {userLogged?.id == empresa?.id &&
+                <button onClick={clickConfig}>Configurações</button>
+            }
         </div>
 
         <div className="flex w-full mt-3 px-3">
@@ -108,6 +123,9 @@ function EmpresaPerfil(){
             }
             {acoes &&
                 <VagasSlider url={`/vagas/empresa/vagas/${params.id}`}/>
+            }
+            {config &&
+                <EditarPerfil />
             }
         </div>
 
