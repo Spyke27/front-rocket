@@ -23,7 +23,7 @@ function Footer() {
                 <img src={linkedin} alt="instagram" className='w-10' />
             </div>
                 <a href="" className='text-white text-xs font-light mt-5 hover:underline'>Política de Privacidade</a>
-                <p className='text-white text-xs font-light my-8'>© 2023 CBVE. Todos os direitos reservados.</p>
+                <p className='text-white text-xs font-light my-8'>© 2024 CBVE. Todos os direitos reservados.</p>
         </footer>
     </>
     )

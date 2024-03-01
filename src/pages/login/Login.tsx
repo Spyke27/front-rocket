@@ -91,7 +91,7 @@ function Login() {
         Selecione uma opção:</label>
       <select
       id="tipo" name="tipo"
-      className="w-28"
+      className="text-cinza-900 text-sm rounded-lg w-32 p-2.5 border"
       value={tipo}
       onChange={(e) => setTipo(e.target.value)}>
         <option value="usuarios">Usuário</option>

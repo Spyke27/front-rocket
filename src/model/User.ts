@@ -1,4 +1,5 @@
 import Empresa from "./Empresa";
+import Endereco from "./Endereco";
 import Vaga from "./Vaga";
 
 interface User {
@@ -12,8 +13,9 @@ interface User {
     data_nasc: string;
     empresa_id: number;
     avatar?: string | null;
-    Vaga?: Vaga | null
-    Empresa?: Empresa | null
+    Vaga?: Vaga | null;
+    Empresa?: Empresa | null;
+    Endereco?: Endereco | null;
 }
 
 export default User;

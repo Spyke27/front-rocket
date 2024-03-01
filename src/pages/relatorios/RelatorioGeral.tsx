@@ -114,30 +114,42 @@ function RelatorioGeralAdm(){
             <div className="flex flex-col justify-center items-center rounded-md py-10 text-cinza-100 w-full
             bg-black/70 gap-5">
                 <h2 className="text-4xl">Classificações mais engajadas:</h2>
-                <div className="flex justify-center gap-5 w-full md:px-10">
+                <div className="flex items-start gap-5 w-full md:px-10">
+
                     <div className="flex flex-col w-1/3 justify-center items-center gap-1">
                         <p className="text-cinza-100 text-3xl">Causa</p>
-                        <div className="bg-gradient-to-r from-roxo-500 to-roxo-200 p-1 w-full">
-                            <div className="flex justify-center items-center px-5 py-2 bg-black/90">
-                                <span className="text-cinza-100 text-2xl text-center">{relatorio?.causa}</span>
+                        {relatorio?.rankCausas.map((causa, i) => (
+                            <div className="bg-gradient-to-r from-roxo-500 to-roxo-200 p-1 w-full">
+                                <div className="flex relative justify-center items-center px-5 py-2 bg-black/90">
+                                    <span className="text-cinza-100 text-2xl text-center">{causa}</span>
+                                    <span className="absolute -left-5 z-30 flex items-center justify-center bg-cinza-900 rounded-full text-base font-bold px-3 py-2 border-2 border-verde-300">{i + 1 +"°"}</span>
+                                </div>
                             </div>
-                        </div>
+                        ))}
                     </div>
+
                     <div className="flex flex-col w-1/3 justify-center items-center gap-1">
-                        <p className="text-cinza-100 text-3xl">Ods</p>
-                        <div className="bg-gradient-to-r from-roxo-500 to-roxo-200 p-1 w-full">
-                            <div className="flex justify-center items-center px-5 py-2 bg-black/90">
-                                <span className="text-cinza-100 text-2xl text-center">{relatorio?.ods}</span>
+                        <p className="text-cinza-100 text-3xl">ODS</p>
+                        {relatorio?.rankOds.map((ods, i) => (
+                            <div className="bg-gradient-to-r from-roxo-500 to-roxo-200 p-1 w-full">
+                                <div className="flex relative justify-center items-center px-5 py-2 bg-black/90">
+                                    <span className="text-cinza-100 text-2xl text-center">{ods}</span>
+                                    <span className="absolute -left-5 z-30 flex items-center justify-center bg-cinza-900 rounded-full text-base font-bold px-3 py-2 border-2 border-verde-300">{i + 1 +"°"}</span>
+                                </div>
                             </div>
-                        </div>
+                        ))}
                     </div>
+
                     <div className="flex flex-col w-1/3 justify-center items-center gap-1">
                         <p className="text-cinza-100 text-3xl">Política Pública</p>
-                        <div className="bg-gradient-to-r from-roxo-500 to-roxo-200 p-1 w-full">
-                            <div className="flex justify-center items-center px-5 py-2 bg-black/90">
-                                <span className="text-cinza-100 text-2xl text-center">{relatorio?.politica}</span>
+                        {relatorio?.rankPoliticas.map((politica, i) => (
+                            <div className="bg-gradient-to-r from-roxo-500 to-roxo-200 p-1 w-full">
+                                <div className="flex relative justify-center items-center px-5 py-2 bg-black/90">
+                                    <span className="text-cinza-100 text-2xl text-center">{politica}</span>
+                                    <span className="absolute -left-5 z-30 flex items-center justify-center bg-cinza-900 rounded-full text-base font-bold px-3 py-2 border-2 border-verde-300">{i + 1 +"°"}</span>
+                                </div>
                             </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>

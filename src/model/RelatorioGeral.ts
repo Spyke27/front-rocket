@@ -5,9 +5,9 @@ interface RelatorioGeral {
     usuarios: number;
     empresas: number;
     instituicoes: number;
-    causa: string;
-    ods: string;
-    politica: string;
+    rankCausas: string[],
+    rankOds: string[],
+    rankPoliticas: string[]
 }
 
 export default RelatorioGeral;

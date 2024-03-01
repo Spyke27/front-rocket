@@ -1,11 +1,12 @@
 interface Relatorio {
     usuariosCadastrados: number;
     tempoVoluntariado: number;
+    tempoVoluntariadoIndividual: number;
     pessoasImpactadas: number;
-    causa: string;
-    ods: string;
+    rankCausas: string[],
+    rankOds: string[],
+    rankPoliticas: string[],
     qtdVagas: number;
-    politica: string;
 }
 
 export default Relatorio;

@@ -30,7 +30,7 @@ export const VagasLocal = () => {
 
     useEffect(() => {
         const getVagas = async () => {
-            const response = await api.get(`/local/vagas/${empresa?.Endereco?.bairro}/${empresa?.Endereco?.estado}`)
+            const response = await api.get(`/local/vagas/${empresa?.Endereco?.bairro}/${empresa?.Endereco?.estado}/${empresa?.Endereco?.cidade}`)
             setVagas(response.data)
         }
         getVagas();

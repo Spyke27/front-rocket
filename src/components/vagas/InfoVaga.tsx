@@ -201,7 +201,7 @@ function InfoVaga(){
                 <img src={vaga.capa ?? CapaPadrao} alt="Imagem de capa"
                 className="w-full rounded-md h-64"/>
 
-            <Link to={`/empresas/info/${vaga.empresa_id ?? vaga.ong_id}`}>
+            <Link to={`/${vaga.ong_id ? "instituicoes" : "empresas"}/info/${vaga.empresa_id ?? vaga.ong_id}`}>
                 <p className="text-lg text-cinza-900 text-center hover:underline">
                     Por: {nome}
                 </p>

@@ -16,7 +16,7 @@ function Vagas(){
       }, []);
 
     useEffect(() => {
-        if(userLogged?.tipo == 'empresas' || userLogged?.tipo == 'ongs'){
+        if(userLogged?.tipo == 'empresas'){
             setAllow(true)
         }
     }, [userLogged?.tipo])

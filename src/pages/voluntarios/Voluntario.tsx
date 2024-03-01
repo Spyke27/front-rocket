@@ -1,25 +1,13 @@
+import { useContext } from 'react'
+import { UserContext } from '../../contexts/UserContex'
 import BannerVoluntario from '../../assets/images/BannerVoluntarios.png'
-import { useContext, useEffect, useState } from "react"
-import { UserContext } from "../../contexts/UserContex"
 import { VagasSlider } from '../../components/vagas/VagasSlider'
-import { api } from '../../service/Service'
-import Empresa from '../../model/Empresa'
 
-import SendIcon from '../../assets/icons/plane.svg'
-import { Link } from 'react-router-dom'
+import ManThinking from '../../assets/images/ManThinking.svg'
 
 function Voluntario(){
     const largura = window.screen.width
     const userLogged = useContext(UserContext)
-    const [empresa, setEmpresa] = useState<Empresa>()
-
-    useEffect(() => {
-        async function getEmpresa(){
-            const response = await api.get(`/empresas/id/${sessionStorage.getItem('empresaIdUser')}`)
-            setEmpresa(response.data)
-        }
-        getEmpresa()
-    }, [])
 
     return(
     <>
@@ -34,38 +22,21 @@ function Voluntario(){
             }
         </div>
 
-        {userLogged?.tipo == "usuarios" &&
-            <div className='flex flex-col'>
-                <div className='flex flex-col items-center bg-azul-200/10'>
-                    <div className='flex flex-col p-5 bg-black/20 rounded-md mt-10'>
-                        <p><span className='text-laranja-400 font-bold'>Aviso! </span>
-                        Abaixo você encontrará somente as ações que sua empresa se associou.</p>
-                    </div>
-                    <VagasSlider 
-                        url={`/vagas/empresa/vagas/${sessionStorage.getItem('empresaIdUser')}`}
-                        text={'Ações disponíveis:'} />
-                </div>
+        {userLogged?.tipo == 'usuarios' && 
+            <VagasSlider url={`/vagas/empresa/vagas/${sessionStorage.getItem('empresaIdUser')}`} text={'Ações disponíveis:'}/>
+        }
 
-                <div className='w-full px-20 mt-10'>
-                    <div className='flex flex-col items-center justify-center py-5 rounded-lg bg-black/20 text-cinza-900'>
-                        <h2 className='font-bold text-xl'>Gostou de alguma ação e ela não está disponível?</h2>
-                        <p>Entre em contato com o responsável pelo voluntariado em sua empresa e solicite a associação</p>
-
-                        <Link to={`mailto:${empresa?.email}`}>
-                            <button 
-                                className='flex gap-2 justify-center items-center bg-verde-300 md:px-5 md:py-2 rounded-md hover:bg-verde-300/80 text-cinza-100 mt-3'>
-                                    Solicitar para empresa
-                                <img src={SendIcon} width={18} />
-                            </button>
-                        </Link>
-
-                        <div className='flex mt-10'>
-                            <p>Caso prefira, entre em contato conosco e iremos lhe auxiliar!</p>
-                        </div>
-                    </div>
+        {userLogged?.tipo != 'usuarios' && 
+            <div className='flex justify-center items-center md:mt-10'>
+                <div className='flex justify-center gap-5 items-center bg-azul-200/20 rounded-md p-10 md:w-2/3 text-center'>
+                    <p className='w-120 text-xl'>Área destinada à colaboradores de empresas parceiras. <br />
+                    Serão visíveis somente ações cujo a <b>empresa</b> já esteja previamente <b>assossiada</b>.
+                    </p>
+                    <img src={ManThinking} alt="Homem pensativo" width={150}/>
                 </div>
             </div>
         }
+
     </section>
     </>
     )

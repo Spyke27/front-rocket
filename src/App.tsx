@@ -18,6 +18,9 @@ import RelatorioEmpresa from './pages/relatorios/RelatorioEmpresa'
 import EditarVaga from './pages/editar/EditarVaga'
 import RelatorioGeral from './pages/relatorios/RelatorioGeral'
 import Voluntario from './pages/voluntarios/Voluntario'
+import InstituicaoPerfil from './pages/perfil/Instituicao'
+import Instituicao from './pages/instituicoes/Instituicao'
+import VoluntarioPerfil from './pages/perfil/Voluntario'
 
 function App() {
 
@@ -33,6 +36,11 @@ function App() {
 
         <Route path='/empresas' element={<Empresas />} />
         <Route path='/empresas/info/:id' element={<EmpresaPerfil />} />
+
+        <Route path='/instituicoes/info/:id' element={<InstituicaoPerfil />} />
+        <Route path='/instituicoes' element={<Instituicao />} />
+
+        <Route path='/usuarios/info/:id' element={<VoluntarioPerfil />} />
 
         <Route path='/vagas/cadastrar' element={<CadastroVaga />} />
         <Route path='/vagas/editar/:id' element={<EditarVaga />} />

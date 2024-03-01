@@ -79,8 +79,6 @@ function CadastroVaga() {
     const updateModel = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
 
-        console.log(`Politica: ${vaga.politica_id} \n Causa: ${vaga.causa_id}`)
-
         setVaga({
             ...vaga,
             [e.target.name]: e.target.value.trim(),

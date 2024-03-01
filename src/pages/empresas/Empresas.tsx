@@ -35,7 +35,7 @@ return(
     </Link>
 
     {userLogged?.tipo == 'empresas' &&
-        <VagasSlider url={`/vagas/empresa/vagas/${userLogged.id}`} text={'Vagas associadas:'}/>
+        <VagasSlider url={`/vagas/empresa/vagas/${userLogged.id}`} text={'Ações associadas:'}/>
     }
 
     {userLogged?.tipo != 'empresas' &&
@@ -76,10 +76,6 @@ return(
                 associe-se
             </button>
             </Link>
-
-            <div>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/p3NTyA9uV9A?si=4Hk-If9btsO1A4zV" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-            </div>
         </section>
     }
 
