@@ -15,6 +15,7 @@ function CadastroOng() {
       senha: '',
       cadastro: '',
       sobre: '',
+      site: '',
     })
 
     useEffect(() => {
