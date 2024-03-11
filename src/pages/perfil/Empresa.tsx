@@ -52,7 +52,7 @@ function EmpresaPerfil(){
     }, [params.id])
 
     useEffect(() => {
-        if(params.id == userLogged?.id && Number(userLogged?.id) == 75017){
+        if(params.id == userLogged?.id && Number(userLogged?.id) == 75000){
             setAuthAdm(true)
         }
     }, [params.id, userLogged?.id])
