@@ -15,7 +15,7 @@ function CadastroVaga() {
     const [politicas, setPoliticas] = useState<Politica[]>([]);
     const [selectCausa, setSelectCausa] = useState('1');
     const [selectOds, setSelectOds] = useState('1');
-    const [selectPolitica, setSelectPolitica] = useState('5');
+    const [selectPolitica, setSelectPolitica] = useState('1');
     const [selectData, setSelectData] = useState('');
     const [text, setText] = useState('');
     const [cep, setCep] = useState('');
