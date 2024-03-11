@@ -197,58 +197,68 @@ function InfoVaga(){
                 </div>
             </div>
 
-            <div className="flex flex-col items-center w-2/5 gap-3">
+            <div className="flex flex-col items-center w-2/5">
                 <img src={vaga.capa ?? CapaPadrao} alt="Imagem de capa"
                 className="w-full rounded-md h-64"/>
 
             <Link to={`/${vaga.ong_id ? "instituicoes" : "empresas"}/info/${vaga.empresa_id ?? vaga.ong_id}`}>
-                <p className="text-lg text-cinza-900 text-center hover:underline">
+                <p className="text-lg text-cinza-900 text-center hover:underline md:mt-3 md:mb-3">
                     Por: {nome}
                 </p>
             </Link>
 
                 {userType == 'empresas' &&
                     <div className="flex flex-col gap-2 w-full">
-                        <div className="flex gap-2 justify-between">
-                            {!associado && 
-                            <div className="w-full">
-                                {vaga.disponivel? <AssociarEmpresa /> : <Indisponivel />}
+                        {vaga.empresa_id != userLogged?.id ?
+                            <div className="w-full flex flex-col">
+                                {vaga.disponivel ?
+                                    <div className="w-full flex gap-3">
+                                        {associado ? 
+                                            <AssociarEmpresa /> : <RemoveAssociacao />
+                                        }
+                                        <SendMessage email={`${email}`} />
+                                    </div>
+                                    :
+                                    <Indisponivel />
+                                }
+                            </div> :
+                            <div>
+                                {vaga.finalizada == false && <FinalizarVaga tempo={vaga.duracao} />}
                             </div>
-                            }
-                            {associado && 
-                                <div className="w-full">
-                                    {vaga.disponivel && 
-                                        <div>
-                                            {vaga.empresa_id == userLogged?.id ? 
-                                            <div className="flex gap-3">
-                                                <DeletarVaga />
-                                                <EditarVaga />
-                                            </div> 
-                                            : <RemoveAssociacao /> }
-                                        </div>
-                                    }
-                                </div>
-                            }
-                                <SendMessage email={`${email}`} />
-                        </div>
+                        }
+                        {vaga.disponivel && 
+                            <div className="w-full">
+                                {vaga.empresa_id == userLogged?.id &&
+                                    <div className="flex gap-3">
+                                        <DeletarVaga />
+                                        <EditarVaga />
+                                    </div> 
+                                }
+                            </div>
+                        }
                         
                         {!vaga.finalizada &&
-                        <div>
                             <div className="w-full">
-                                {userLogged?.id == vaga.empresa_id &&
-                                    <div>
-                                        {vaga.finalizada == false && <FinalizarVaga tempo={vaga.duracao} />}
-                                    </div>
-                                }
                                 {userLogged?.id == vaga.ong_id &&
                                     <div>
                                         {vaga.finalizada == false && <FinalizarVaga tempo={vaga.duracao} />}
                                     </div>
                                 }
                             </div>
-                        </div>
                         }
                     </div>
+                }
+
+                {userType == 'ongs' &&
+                    <div className="flex flex-col gap-3 w-full mb-3">
+                        {vaga.ong_id == userLogged?.id && 
+                            <div className="flex gap-3">
+                                <DeletarVaga />
+                                <EditarVaga />
+                            </div> 
+                        }
+                        {vaga.finalizada == false && <FinalizarVaga tempo={vaga.duracao} />}
+                    </div>  
                 }
 
                 {userType == 'usuarios' &&
@@ -268,7 +278,7 @@ function InfoVaga(){
                     </div>
                 }
 
-                <div className="flex justify-center w-full items-center gap-5 bg-laranja-300/90 py-3 px-10 rounded-md">
+                <div className="flex justify-center w-full items-center gap-5 bg-laranja-300/90 md:py-3 md:px-10 rounded-md">
                     <p className="text-white">Vagas disponíveis: </p>
                     <span className="flex gap-2 py-2 px-4 bg-white rounded-full">
                         <p className="text-xs text-laranja-300">{vaga.qtd_volun}/{vaga.qtd_vagas}</p>

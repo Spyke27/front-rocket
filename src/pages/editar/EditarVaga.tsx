@@ -139,7 +139,7 @@ function EditarVaga() {
                 maxLength={500}
                 value={text}
                 onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setText(e.target.value)}
-                className="text-cinza-600 text-sm w-full h-20 p-2.5 outline-none border" required/>
+                className="text-cinza-600 text-sm w-full h-36 p-2.5 outline-none border" required/>
             </div>
 
             <button 

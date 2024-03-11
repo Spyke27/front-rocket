@@ -5,6 +5,7 @@ import PlusIcon from '../../assets/icons/plus.svg'
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContex";
 import { VagasLocal } from "../../components/vagas/VagasLocal";
+import { VagasBuscaLocal } from "../../components/vagas/VagasBuscaLocal";
 
 function Vagas(){
     const userLogged = useContext(UserContext)
@@ -31,8 +32,10 @@ function Vagas(){
     return(
         <>
         <div className="flex flex-col relative">
+            
             <VagasCausa />
             {allow && <VagasLocal />}
+            <VagasBuscaLocal />
             <VagasSlider url={'/vagas/listar/ultimas'} text={'Ações fresquinhas:'}/>
             
             

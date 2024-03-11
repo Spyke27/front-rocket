@@ -4,10 +4,14 @@ import logo from "../../../assets/cbve/cbve_logo.png";
 import search from "../../../assets/icons/search.svg";
 import Logout from "../../../assets/icons/logout.svg";
 import ProfileIcon from "../../../assets/icons/profile.svg";
-import { useContext } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { UserContext } from "../../../contexts/UserContex";
+import { VagasSlider } from "../../vagas/VagasSlider";
+import ArrowLeftIcon from '../../../assets/icons/arrow_left.svg'
 
 function Navbar() {
+  const [busca, setBusca] = useState('')
+  const [resultado, setResultado] = useState(false)
   const navigate = useNavigate()
   const userLogged = useContext(UserContext)
 
@@ -50,16 +54,24 @@ function Navbar() {
           <form className="hidden md:flex">
             <label
               htmlFor="default-search"
-              className="mb-2 text-sm font-medium text-cinza-500"
-            ></label>
+              className="mb-2 text-sm font-medium text-cinza-500" >
+            </label>
             <div className="bg-cinza-100 ml-10 rounded-full w-96 flex justify-between items-center py-2 px-3">
-              <img src={search} alt="search-icon" className="h-6 mr-3" />
               <input
+                value={busca}
+                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                  if(e.key === 'Enter'){
+                    e.preventDefault()
+                    setResultado(true)
+                  }
+                }}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setBusca(e.target.value)}
                 type="search"
                 id="default-search"
-                placeholder="Busque por vagas ou ongs"
-                className="bg-transparent placeholder-cinza-400 w-full border-none outline-none text-black"
+                placeholder="Busque por ações ou ongs"
+                className="bg-transparent ml-5 placeholder-cinza-400 w-full border-none outline-none text-black"
               />
+              <img src={search} alt="search-icon" className="h-6 ml-3 cursor-pointer" onClick={() => setResultado(true)}/>
             </div>
           </form>
         </div>
@@ -90,11 +102,9 @@ function Navbar() {
         )}
       </nav>
 
-      <div
-        id="sub-menu"
+      <div id="sub-menu"
         className="flex relative justify-center items-center bg-roxo-300 text-cinza-100 h-6 gap-8 
-        [&>*:hover]:scale-105 [&>*:hover]:text-white"
-      >
+        [&>*:hover]:scale-105 [&>*:hover]:text-white">
         <Link to={'/vagas'}>Ações</Link>
         <Link to={'/empresas'}>Empresa</Link>
         <Link to={'/voluntarios'}>Voluntário</Link>
@@ -109,6 +119,24 @@ function Navbar() {
         </button>
         }
       </div>
+
+      {busca.length > 0 &&
+        <div className="absolute z-50 bg-white w-full md:py-10">
+            {resultado && 
+              <section className="flex">
+                <button
+                    onClick={() => {
+                      setResultado(false)
+                      setBusca('')
+                    }}
+                    className="flex justify-center items-center bg-cinza-200 rounded-full p-3 absolute top-3 left-3 z-10">
+                        <img src={ArrowLeftIcon} width={20}/>
+                </button>
+                <VagasSlider url={`/vagas/buscar/${busca}`} text={"Resultado da pesquisa:"}/>
+              </section>
+            }
+        </div>
+      }
     </>
   );
 }
